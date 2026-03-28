@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { useMemo } from "react"
+import { useMemo, Suspense } from "react"
 import Link from "next/link"
 import { Search, Star, Building2, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
@@ -39,7 +39,7 @@ function highlightMatch(text: string, query: string) {
   )
 }
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams()
   const q = searchParams.get("q") || ""
 
@@ -288,5 +288,13 @@ export default function SearchPage() {
         )}
       </main>
     </div>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense>
+      <SearchPageContent />
+    </Suspense>
   )
 }

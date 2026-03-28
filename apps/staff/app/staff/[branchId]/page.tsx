@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect } from "react"
+import { use, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { AnimatePresence } from "framer-motion"
 import { mockBranches } from "@workspace/mock-data"
@@ -10,8 +10,7 @@ interface PageProps {
   params: Promise<{ branchId: string }>
 }
 
-export default function StaffLoginPage({ params }: PageProps) {
-  const { branchId } = use(params)
+function StaffLoginContent({ branchId }: { branchId: string }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
@@ -50,5 +49,14 @@ export default function StaffLoginPage({ params }: PageProps) {
     <AnimatePresence mode="wait">
       <PinLogin branchName={branchName} onLogin={handleLogin} />
     </AnimatePresence>
+  )
+}
+
+export default function StaffLoginPage({ params }: PageProps) {
+  const { branchId } = use(params)
+  return (
+    <Suspense>
+      <StaffLoginContent branchId={branchId} />
+    </Suspense>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { use, useEffect, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { AnimatePresence } from "framer-motion"
 import { Badge } from "@workspace/ui/components/badge"
@@ -101,8 +101,7 @@ function QueueContent({
   )
 }
 
-export default function QueuePage({ params }: PageProps) {
-  const { branchId } = use(params)
+function QueuePageInternalWithParams({ branchId }: { branchId: string }) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -141,6 +140,15 @@ export default function QueuePage({ params }: PageProps) {
         isDemo={isDemo}
       />
     </StaffProvider>
+  )
+}
+
+export default function QueuePage({ params }: PageProps) {
+  const { branchId } = use(params)
+  return (
+    <Suspense>
+      <QueuePageInternalWithParams branchId={branchId} />
+    </Suspense>
   )
 }
 

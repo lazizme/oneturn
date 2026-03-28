@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useCallback, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
@@ -50,7 +50,7 @@ function formatNumber(n: number): string {
   return n.toString()
 }
 
-export default function ExplorePage() {
+function ExplorePageContent() {
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
   const typeParam = searchParams.get("type") as OrgType | null
@@ -589,5 +589,13 @@ export default function ExplorePage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function ExplorePage() {
+  return (
+    <Suspense>
+      <ExplorePageContent />
+    </Suspense>
   )
 }

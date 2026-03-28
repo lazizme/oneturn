@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useRef } from "react"
+import { useState, useMemo, useRef, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
@@ -36,7 +36,7 @@ function formatNumber(n: number): string {
   return n.toString()
 }
 
-export default function HomePage() {
+function HomePageContent() {
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
   const { location } = useLocation()
@@ -356,5 +356,13 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <Suspense>
+      <HomePageContent />
+    </Suspense>
   )
 }
