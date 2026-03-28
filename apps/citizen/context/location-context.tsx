@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
   type ReactNode,
 } from "react"
 import { tashkentDistricts } from "@workspace/mock-data"
@@ -27,28 +28,28 @@ const defaultLocation: LocationData = {
   lng: 69.2200,
 }
 
-function getInitialLocation(): LocationData {
-  if (typeof window === "undefined") return defaultLocation
-  try {
-    const stored = localStorage.getItem("oneturn-location")
-    if (stored) {
-      const parsed = JSON.parse(stored)
-      const match = tashkentDistricts.find((d) => d.id === parsed.id)
-      if (match) return { ...match }
-    }
-  } catch {
-    // ignore
-  }
-  return defaultLocation
-}
-
 const LocationContext = createContext<LocationContextValue>({
   location: defaultLocation,
   setLocation: () => {},
 })
 
 export function LocationProvider({ children }: { children: ReactNode }) {
-  const [location, setLocationState] = useState<LocationData>(getInitialLocation)
+  const [location, setLocationState] = useState<LocationData>(defaultLocation)
+
+  // Hydrate from localStorage after mount to avoid SSR mismatch
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("oneturn-location")
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        const match = tashkentDistricts.find((d) => d.id === parsed.id)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (match) setLocationState({ ...match })
+      }
+    } catch {
+      // ignore
+    }
+  }, [])
 
   function setLocation(loc: LocationData) {
     setLocationState(loc)
