@@ -1,0 +1,39 @@
+:root {
+  --staff-bg: #0F172A;
+  --staff-card: #1E293B;
+  --staff-border: #334155;
+  --staff-text: #F8FAFC;
+  --staff-muted: #94A3B8;
+  --staff-green: #10B981;
+  --staff-red: #EF4444;
+  --staff-blue: #2563EB;
+  --staff-amber: #F59E0B;
+}
+
+body {
+  background-color: var(--staff-bg);
+  color: var(--staff-text);
+  overflow: hidden;
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-8px); }
+  40%  { transform: translateX(8px); }
+  60%  { transform: translateX(-4px); }
+  80%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-shake {
+  animation: shake 300ms ease-in-out;
+}
+
+@keyframes flash-green {
+  0% { background-color: rgba(16, 185, 129, 0.2); }
+  100% { background-color: transparent; }
+}
+
+.animate-flash-green {
+  animation: flash-green 200ms ease-out;
+}

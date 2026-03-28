@@ -1,0 +1,23 @@
+:root {
+  --c-bg: #FFFFFF;
+  --c-surface: #F8FAFC;
+  --c-border: #E2E8F0;
+  --c-text: #0F172A;
+  --c-muted: #64748B;
+
+  --c-primary: #2563EB;
+  --c-primary-light: #EFF6FF;
+  --c-accent: #10B981;
+  --c-accent-light: #ECFDF5;
+  --c-warning: #F59E0B;
+  --c-danger: #EF4444;
+
+  --c-gov: #8B5CF6;
+  --c-gov-light: #F5F3FF;
+  --c-bank: #2563EB;
+  --c-bank-light: #EFF6FF;
+  --c-clinic: #10B981;
+  --c-clinic-light: #ECFDF5;
+  --c-other: #F59E0B;
+  --c-other-light: #FFFBEB;
+}
