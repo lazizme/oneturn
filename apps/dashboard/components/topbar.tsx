@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Notification01Icon } from "@hugeicons/core-free-icons"
 import { Badge } from "@workspace/ui/components/badge"
 
 interface TopbarProps {
@@ -19,7 +20,7 @@ export function Topbar({ title, subtitle }: TopbarProps) {
       </div>
       <div className="flex items-center gap-3">
         <button className="relative rounded-xl p-2 transition-colors hover:bg-gray-100">
-          <Bell className="size-5 text-gray-500" />
+          <HugeiconsIcon icon={Notification01Icon} size={20} className="text-gray-500" />
           <Badge
             className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full p-0 text-[9px] text-white"
             style={{ backgroundColor: "var(--brand-danger)" }}

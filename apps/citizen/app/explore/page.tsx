@@ -1,20 +1,14 @@
 "use client"
 
-import { useState, useMemo, useCallback, Suspense } from "react"
+import { useState, useMemo, useCallback, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import {
-  Star,
-  Clock,
-  List,
-  Map,
-  ChevronDown,
-  SlidersHorizontal,
-  ArrowRight,
-  X,
-} from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { StarIcon, Clock01Icon, ListViewIcon, MapsIcon, ArrowDown01Icon, FilterHorizontalIcon, ArrowRight02Icon, Cancel01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
+import { Checkbox } from "@workspace/ui/components/checkbox"
+import { RadioGroup, RadioGroupItem } from "@workspace/ui/components/radio-group"
 import { Navbar } from "@/components/layout/navbar"
 import { useLocation } from "@/context/location-context"
 import { citizenOrganizations, allCitizenBranches } from "@workspace/mock-data"
@@ -72,6 +66,11 @@ function ExplorePageContent() {
   const [viewMode, setViewMode] = useState<ViewMode>(viewParam === "map" ? "map" : "list")
   const [showSortDropdown, setShowSortDropdown] = useState(false)
   const [showMobileFilters, setShowMobileFilters] = useState(false)
+
+  // Sync viewMode with URL search param on client-side navigation
+  useEffect(() => {
+    setViewMode(viewParam === "map" ? "map" : "list")
+  }, [viewParam])
 
   // Toggle category
   const toggleCategory = useCallback((type: OrgType) => {
@@ -177,14 +176,14 @@ function ExplorePageContent() {
         <div className="space-y-2">
           {orgTypes.map((type) => (
             <label key={type} className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={categoryFilters[type]}
-                onChange={() => toggleCategory(type)}
-                className="size-4 rounded accent-(--c-primary)"
+                onCheckedChange={() => toggleCategory(type)}
+                className="data-checked:border-(--c-primary) data-checked:bg-(--c-primary)"
               />
-              <span className="text-sm" style={{ color: "var(--c-text)" }}>
-                {getCategoryIcon(type)} {getCategoryLabel(type)}
+              <span className="flex items-center gap-1.5 text-sm" style={{ color: "var(--c-text)" }}>
+                <HugeiconsIcon icon={getCategoryIcon(type)} size={14} />
+                {getCategoryLabel(type)}
               </span>
             </label>
           ))}
@@ -198,26 +197,20 @@ function ExplorePageContent() {
         <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: "var(--c-muted)" }}>
           Holat
         </p>
-        <div className="space-y-2">
+        <RadioGroup value={statusFilter} onValueChange={(v) => setStatusFilter(v as StatusFilter)}>
           {([
             { value: "all", label: "Barchasi" },
             { value: "open", label: "Faqat ochiq" },
             { value: "free", label: "Bo'sh (<40%)" },
           ] as const).map((opt) => (
             <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="status"
-                checked={statusFilter === opt.value}
-                onChange={() => setStatusFilter(opt.value)}
-                className="size-4 accent-(--c-primary)"
-              />
+              <RadioGroupItem value={opt.value} className="data-checked:border-(--c-primary) data-checked:bg-(--c-primary)" />
               <span className="text-sm" style={{ color: "var(--c-text)" }}>
                 {opt.label}
               </span>
             </label>
           ))}
-        </div>
+        </RadioGroup>
       </div>
 
       <div className="border-t" style={{ borderColor: "var(--c-border)" }} />
@@ -227,7 +220,7 @@ function ExplorePageContent() {
         <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: "var(--c-muted)" }}>
           Kutish vaqti
         </p>
-        <div className="space-y-2">
+        <RadioGroup value={waitFilter} onValueChange={(v) => setWaitFilter(v as WaitFilter)}>
           {([
             { value: "all", label: "Barchasi" },
             { value: "10", label: "10 daqiqagacha" },
@@ -235,19 +228,13 @@ function ExplorePageContent() {
             { value: "60", label: "1 soatgacha" },
           ] as const).map((opt) => (
             <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="wait"
-                checked={waitFilter === opt.value}
-                onChange={() => setWaitFilter(opt.value)}
-                className="size-4 accent-(--c-primary)"
-              />
+              <RadioGroupItem value={opt.value} className="data-checked:border-(--c-primary) data-checked:bg-(--c-primary)" />
               <span className="text-sm" style={{ color: "var(--c-text)" }}>
                 {opt.label}
               </span>
             </label>
           ))}
-        </div>
+        </RadioGroup>
       </div>
     </div>
   )
@@ -291,7 +278,7 @@ function ExplorePageContent() {
                 className="flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium lg:hidden"
                 style={{ borderColor: "var(--c-border)", color: "var(--c-text)" }}
               >
-                <SlidersHorizontal className="size-3.5" />
+                <HugeiconsIcon icon={FilterHorizontalIcon} size={14} />
                 Filtrlar
               </button>
               <p className="text-sm" style={{ color: "var(--c-muted)" }}>
@@ -313,7 +300,7 @@ function ExplorePageContent() {
                     color: viewMode === "list" ? "white" : "var(--c-muted)",
                   }}
                 >
-                  <List className="size-3.5" />
+                  <HugeiconsIcon icon={ListViewIcon} size={14} />
                   Ro&apos;yxat
                 </button>
                 <button
@@ -324,7 +311,7 @@ function ExplorePageContent() {
                     color: viewMode === "map" ? "white" : "var(--c-muted)",
                   }}
                 >
-                  <Map className="size-3.5" />
+                  <HugeiconsIcon icon={MapsIcon} size={14} />
                   Xarita
                 </button>
               </div>
@@ -337,7 +324,7 @@ function ExplorePageContent() {
                   style={{ borderColor: "var(--c-border)", color: "var(--c-text)" }}
                 >
                   {sortLabels[sortBy]}
-                  <ChevronDown className="size-3" />
+                  <HugeiconsIcon icon={ArrowDown01Icon} size={12} />
                 </button>
                 {showSortDropdown && (
                   <div
@@ -355,7 +342,7 @@ function ExplorePageContent() {
                         style={{ color: sortBy === key ? "var(--c-primary)" : "var(--c-text)" }}
                       >
                         {sortLabels[key]}
-                        {sortBy === key && <span className="text-xs">✓</span>}
+                        {sortBy === key && <HugeiconsIcon icon={Tick02Icon} size={12} />}
                       </button>
                     ))}
                   </div>
@@ -419,7 +406,7 @@ function ExplorePageContent() {
                           <div className="mt-3 flex items-center gap-3 text-xs" style={{ color: "var(--c-muted)" }}>
                             {org.rating && (
                               <span className="flex items-center gap-1">
-                                <Star className="size-3 fill-amber-400 text-amber-400" />
+                                <HugeiconsIcon icon={StarIcon} size={12} className="fill-amber-400 text-amber-400" />
                                 {org.rating.toFixed(1)}
                               </span>
                             )}
@@ -516,7 +503,7 @@ function ExplorePageContent() {
                         </p>
                         <div className="mt-2 flex items-center justify-between">
                           <span className="flex items-center gap-1 text-xs" style={{ color: "var(--c-muted)" }}>
-                            <Clock className="size-3" />
+                            <HugeiconsIcon icon={Clock01Icon} size={12} />
                             ~{branch.avgWaitMinutes} daq
                           </span>
                           <Link
@@ -524,7 +511,7 @@ function ExplorePageContent() {
                             className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold text-white"
                             style={{ backgroundColor: "var(--c-primary)" }}
                           >
-                            Navbat <ArrowRight className="size-3" />
+                            Navbat <HugeiconsIcon icon={ArrowRight02Icon} size={12} />
                           </Link>
                         </div>
                       </div>
@@ -573,7 +560,7 @@ function ExplorePageContent() {
                   Tozalash
                 </button>
                 <button onClick={() => setShowMobileFilters(false)}>
-                  <X className="size-5" style={{ color: "var(--c-muted)" }} />
+                  <HugeiconsIcon icon={Cancel01Icon} size={20} style={{ color: "var(--c-muted)" }} />
                 </button>
               </div>
             </div>

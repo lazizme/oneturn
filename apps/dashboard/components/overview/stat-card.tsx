@@ -1,7 +1,7 @@
 "use client"
 
-import type { LucideIcon } from "lucide-react"
-import { TrendingUp, TrendingDown } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { AnalyticsUpIcon, AnalyticsDownIcon } from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import { useCountUp } from "@/hooks/use-count-up"
 
@@ -11,7 +11,7 @@ interface StatCardProps {
   suffix?: string
   delta?: string
   deltaPositive?: boolean
-  icon: LucideIcon
+  icon: any
   color: string
 }
 
@@ -44,9 +44,9 @@ export function StatCard({
           {delta && (
             <div className="mt-2 flex items-center gap-1">
               {deltaPositive ? (
-                <TrendingUp className="size-3.5" style={{ color: "var(--brand-accent)" }} />
+                <HugeiconsIcon icon={AnalyticsUpIcon} size={14} style={{ color: "var(--brand-accent)" }} />
               ) : (
-                <TrendingDown className="size-3.5" style={{ color: "var(--brand-accent)" }} />
+                <HugeiconsIcon icon={AnalyticsDownIcon} size={14} style={{ color: "var(--brand-accent)" }} />
               )}
               <span className="text-xs" style={{ color: "var(--brand-muted)" }}>
                 {delta}
@@ -60,7 +60,7 @@ export function StatCard({
             backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`,
           }}
         >
-          <Icon className="size-5" style={{ color }} />
+          <HugeiconsIcon icon={Icon} size={20} style={{ color }} />
         </div>
       </div>
     </Card>

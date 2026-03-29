@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Plus,
-  MapPin,
-  Clock,
-  Users,
-  Pencil,
-} from "lucide-react"
+  PlusSignIcon,
+  Location01Icon,
+  Clock01Icon,
+  UserGroupIcon,
+  PencilEdit01Icon,
+} from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Card } from "@workspace/ui/components/card"
 import { Badge } from "@workspace/ui/components/badge"
@@ -100,7 +101,7 @@ export default function BranchesPage() {
             style={{ backgroundColor: "var(--brand-primary)" }}
             onClick={handleAdd}
           >
-            <Plus className="size-3.5" />
+            <HugeiconsIcon icon={PlusSignIcon} size={14} />
             Filial qo&apos;shish
           </Button>
         </div>
@@ -119,7 +120,7 @@ export default function BranchesPage() {
                       {branch.name}
                     </h3>
                     <p className="mt-0.5 flex items-center gap-1 text-xs" style={{ color: "var(--brand-muted)" }}>
-                      <MapPin className="size-3" />
+                      <HugeiconsIcon icon={Location01Icon} size={12} />
                       {branch.address}
                     </p>
                   </div>
@@ -134,7 +135,7 @@ export default function BranchesPage() {
                 {/* Stats row */}
                 <div className="mb-4 flex items-center gap-2">
                   <div className="flex items-center gap-1.5 rounded-lg bg-gray-50 px-2.5 py-1.5 text-xs">
-                    <Clock className="size-3" style={{ color: "var(--brand-muted)" }} />
+                    <HugeiconsIcon icon={Clock01Icon} size={12} style={{ color: "var(--brand-muted)" }} />
                     <span className="font-medium text-gray-700">
                       {branch.workingHours.open}–{branch.workingHours.close}
                     </span>
@@ -162,7 +163,7 @@ export default function BranchesPage() {
                 {/* Queue stats */}
                 <div className="mb-4 flex items-center gap-6">
                   <div className="flex items-center gap-1.5 text-sm">
-                    <Users className="size-3.5" style={{ color: "var(--brand-muted)" }} />
+                    <HugeiconsIcon icon={UserGroupIcon} size={14} style={{ color: "var(--brand-muted)" }} />
                     <span className="font-semibold text-gray-900">
                       {branch.currentQueue}
                     </span>
@@ -171,7 +172,7 @@ export default function BranchesPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm">
-                    <Clock className="size-3.5" style={{ color: "var(--brand-muted)" }} />
+                    <HugeiconsIcon icon={Clock01Icon} size={14} style={{ color: "var(--brand-muted)" }} />
                     <span className="font-semibold text-gray-900">
                       ~{branch.avgWaitMinutes}
                     </span>
@@ -222,7 +223,7 @@ export default function BranchesPage() {
                     className="flex-1 gap-1.5 rounded-xl text-xs"
                     onClick={() => handleEdit(branch)}
                   >
-                    <Pencil className="size-3" />
+                    <HugeiconsIcon icon={PencilEdit01Icon} size={12} />
                     Tahrirlash
                   </Button>
                 </div>

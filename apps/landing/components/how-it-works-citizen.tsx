@@ -1,50 +1,50 @@
 "use client"
 
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Globe,
-  SquareMousePointer,
-  MapPin,
-  CalendarDays,
-  Smartphone,
-  PersonStanding,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+  GlobeIcon,
+  Mouse01Icon,
+  Location01Icon,
+  Calendar01Icon,
+  SmartPhone01Icon,
+  UserIcon,
+} from "@hugeicons/core-free-icons"
 
 interface Step {
-  icon: LucideIcon
+  icon: any
   title: string
   description: string
 }
 
 const steps: Step[] = [
   {
-    icon: Globe,
+    icon: GlobeIcon,
     title: "Saytga kiring",
     description: "Bank, klinika yoki davlat idorasi saytiga kiring",
   },
   {
-    icon: SquareMousePointer,
+    icon: Mouse01Icon,
     title: "Tugmani bosing",
     description: "\"Navbat olish\" tugmasi siz uchun mavjud",
   },
   {
-    icon: MapPin,
+    icon: Location01Icon,
     title: "Filialni tanlang",
     description: "Xaritada eng yaqin va bo'sh filialni ko'ring",
   },
   {
-    icon: CalendarDays,
+    icon: Calendar01Icon,
     title: "Vaqt band qiling",
     description: "Bron yoki jonli navbat — siz tanlaysiz",
   },
   {
-    icon: Smartphone,
+    icon: SmartPhone01Icon,
     title: "SMS tasdiqlash",
     description: "OneID yoki telefon raqam orqali bir daqiqada",
   },
   {
-    icon: PersonStanding,
+    icon: UserIcon,
     title: "Xizmat oling",
     description: "Kutmasdan, bilasiz qachon borish kerakligini",
   },
@@ -85,7 +85,7 @@ export function HowItWorksCitizen() {
                   className="flex size-10 items-center justify-center rounded-xl"
                   style={{ backgroundColor: "rgba(37, 99, 235, 0.08)" }}
                 >
-                  <step.icon className="size-5" style={{ color: "#2563EB" }} />
+                  <HugeiconsIcon icon={step.icon} size={20} style={{ color: "#2563EB" }} />
                 </div>
                 <span className="font-display text-2xl font-extrabold text-gray-200">
                   {String(i + 1).padStart(2, "0")}

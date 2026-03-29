@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Loader2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Loading03Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -226,7 +227,7 @@ export function StaffFormModal({
           >
             {saving ? (
               <>
-                <Loader2 className="mr-2 size-3.5 animate-spin" />
+                <HugeiconsIcon icon={Loading03Icon} size={14} className="mr-2 animate-spin" />
                 Saqlanmoqda...
               </>
             ) : isEdit ? (

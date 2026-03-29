@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react"
 import dynamic from "next/dynamic"
-import { Clock, MapPin, Users } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Clock01Icon, Location01Icon, UserGroupIcon } from "@hugeicons/core-free-icons"
 import { Badge } from "@workspace/ui/components/badge"
 import { Button } from "@workspace/ui/components/button"
 import { Card } from "@workspace/ui/components/card"
@@ -140,16 +141,16 @@ export function BranchStep() {
                   <div className="mt-1 flex items-center gap-3 text-xs text-gray-500">
                     {dist !== null && (
                       <span className="flex items-center gap-1">
-                        <MapPin className="size-3" />
+                        <HugeiconsIcon icon={Location01Icon} size={12} />
                         {dist.toFixed(1)} km
                       </span>
                     )}
                     <span className="flex items-center gap-1">
-                      <Users className="size-3" />
+                      <HugeiconsIcon icon={UserGroupIcon} size={12} />
                       {branch.currentQueue} kutmoqda
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="size-3" />~{branch.avgWaitMinutes}{" "}
+                      <HugeiconsIcon icon={Clock01Icon} size={12} />~{branch.avgWaitMinutes}{" "}
                       daq
                     </span>
                   </div>

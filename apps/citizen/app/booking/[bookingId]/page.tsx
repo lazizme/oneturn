@@ -1,7 +1,8 @@
 "use client"
 
 import { use, useState, useMemo } from "react"
-import { CheckCircle, MapPin, Clock, Calendar, XCircle, AlertTriangle } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { CheckmarkCircle01Icon, Location01Icon, Clock01Icon, Calendar01Icon, CancelCircleIcon, Alert01Icon } from "@hugeicons/core-free-icons"
 import { motion, AnimatePresence } from "framer-motion"
 import { format } from "date-fns"
 import dynamic from "next/dynamic"
@@ -69,7 +70,7 @@ export default function BookingPage({
                 className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full"
                 style={{ backgroundColor: "#FEF2F2" }}
               >
-                <XCircle className="size-8" style={{ color: "var(--c-danger)" }} />
+                <HugeiconsIcon icon={CancelCircleIcon} size={32} style={{ color: "var(--c-danger)" }} />
               </div>
 
               <h1 className="text-xl font-bold" style={{ color: "var(--c-danger)" }}>
@@ -116,7 +117,7 @@ export default function BookingPage({
                   className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full"
                   style={{ backgroundColor: "var(--c-accent-light)" }}
                 >
-                  <CheckCircle className="size-8" style={{ color: "var(--c-accent)" }} />
+                  <HugeiconsIcon icon={CheckmarkCircle01Icon} size={32} style={{ color: "var(--c-accent)" }} />
                 </motion.div>
 
                 {/* Title */}
@@ -159,7 +160,7 @@ export default function BookingPage({
 
                 {/* Date */}
                 <div className="mt-3 flex items-center justify-center gap-2">
-                  <Calendar className="size-4" style={{ color: "var(--c-muted)" }} />
+                  <HugeiconsIcon icon={Calendar01Icon} size={16} style={{ color: "var(--c-muted)" }} />
                   <span className="text-sm" style={{ color: "var(--c-muted)" }}>
                     {formattedDate}
                   </span>
@@ -167,7 +168,7 @@ export default function BookingPage({
 
                 {/* Time */}
                 <div className="mt-2 flex items-center justify-center gap-2">
-                  <Clock className="size-4" style={{ color: "var(--c-muted)" }} />
+                  <HugeiconsIcon icon={Clock01Icon} size={16} style={{ color: "var(--c-muted)" }} />
                   <span className="text-sm" style={{ color: "var(--c-muted)" }}>
                     {mockTicket.time}
                   </span>
@@ -180,7 +181,7 @@ export default function BookingPage({
 
                 {/* Address with directions link */}
                 <div className="mt-4 flex items-center justify-center gap-2">
-                  <MapPin className="size-4" style={{ color: "var(--c-primary)" }} />
+                  <HugeiconsIcon icon={Location01Icon} size={16} style={{ color: "var(--c-primary)" }} />
                   <span className="text-sm" style={{ color: "var(--c-text)" }}>
                     {mockTicket.branchAddress}
                   </span>
@@ -212,7 +213,7 @@ export default function BookingPage({
                       transition={{ duration: 0.2 }}
                     >
                       <div className="flex items-center justify-center gap-2 mb-3">
-                        <AlertTriangle className="size-5" style={{ color: "var(--c-warning)" }} />
+                        <HugeiconsIcon icon={Alert01Icon} size={20} style={{ color: "var(--c-warning)" }} />
                         <p className="text-sm font-semibold" style={{ color: "var(--c-text)" }}>
                           Navbatni bekor qilmoqchimisiz?
                         </p>

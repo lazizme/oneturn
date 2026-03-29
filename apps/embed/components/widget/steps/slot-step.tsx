@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Clock, Users, Zap } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Clock01Icon, UserGroupIcon, ZapIcon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Card } from "@workspace/ui/components/card"
 import { Badge } from "@workspace/ui/components/badge"
@@ -68,18 +69,18 @@ export function SlotStep() {
       {/* Live queue option */}
       <Card className="rounded-xl p-4">
         <div className="mb-3 flex items-center gap-2">
-          <Zap className="size-4 text-green-500" />
+          <HugeiconsIcon icon={ZapIcon} size={16} className="text-green-500" />
           <h3 className="text-sm font-semibold text-gray-900">
             Hozir kelaman (Jonli navbat)
           </h3>
         </div>
         <div className="mb-3 flex items-center gap-4 text-xs text-gray-500">
           <span className="flex items-center gap-1">
-            <Users className="size-3" />
+            <HugeiconsIcon icon={UserGroupIcon} size={12} />
             Hozirgi navbat: #{selectedBranch.currentQueue}
           </span>
           <span className="flex items-center gap-1">
-            <Clock className="size-3" />
+            <HugeiconsIcon icon={Clock01Icon} size={12} />
             Kutish: ~{selectedBranch.avgWaitMinutes} daqiqa
           </span>
         </div>
@@ -101,7 +102,7 @@ export function SlotStep() {
       {/* Scheduled option */}
       <Card className="rounded-xl p-4">
         <div className="mb-3 flex items-center gap-2">
-          <Clock className="size-4" style={{ color: "var(--brand-primary)" }} />
+          <HugeiconsIcon icon={Clock01Icon} size={16} style={{ color: "var(--brand-primary)" }} />
           <h3 className="text-sm font-semibold text-gray-900">
             Vaqt band qilaman
           </h3>

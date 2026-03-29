@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Clock, Users } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Clock01Icon, UserGroupIcon } from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import type { Branch } from "@workspace/types"
 import { getBusyColor } from "@/lib/utils"
@@ -37,11 +38,11 @@ export function BranchLeaderboard({ branches }: BranchLeaderboardProps) {
                 </span>
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1 text-xs" style={{ color: "var(--brand-muted)" }}>
-                    <Users className="size-3" />
+                    <HugeiconsIcon icon={UserGroupIcon} size={12} />
                     {branch.currentQueue}
                   </span>
                   <span className="flex items-center gap-1 text-xs" style={{ color: "var(--brand-muted)" }}>
-                    <Clock className="size-3" />~{branch.avgWaitMinutes} daq
+                    <HugeiconsIcon icon={Clock01Icon} size={12} />~{branch.avgWaitMinutes} daq
                   </span>
                   <span className="size-2.5 rounded-full" style={{ backgroundColor: color }} />
                 </div>

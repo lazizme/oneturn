@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Maximize2, Minimize2, LogOut } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Maximize01Icon, Minimize01Icon, Logout01Icon } from "@hugeicons/core-free-icons"
 import { useStaff } from "@/context/staff-context"
 
 interface StaffHeaderProps {
@@ -104,9 +105,9 @@ export function StaffHeader({ onLogout }: StaffHeaderProps) {
           title={isFullscreen ? "Kichiklashtirish" : "To'liq ekran"}
         >
           {isFullscreen ? (
-            <Minimize2 className="size-4" />
+            <HugeiconsIcon icon={Minimize01Icon} size={16} />
           ) : (
-            <Maximize2 className="size-4" />
+            <HugeiconsIcon icon={Maximize01Icon} size={16} />
           )}
         </button>
 
@@ -181,7 +182,7 @@ export function StaffHeader({ onLogout }: StaffHeaderProps) {
                   className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-white/5"
                   style={{ color: "var(--staff-red)" }}
                 >
-                  <LogOut className="size-4" />
+                  <HugeiconsIcon icon={Logout01Icon} size={16} />
                   Chiqish
                 </button>
               )}

@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons"
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -66,7 +67,7 @@ export function Navbar() {
           className="text-white md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          {mobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          {mobileOpen ? <HugeiconsIcon icon={Cancel01Icon} size={24} /> : <HugeiconsIcon icon={Menu01Icon} size={24} />}
         </button>
       </div>
 

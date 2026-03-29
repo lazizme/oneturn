@@ -1,6 +1,7 @@
 "use client"
 
-import { ArrowLeft, X } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowLeft02Icon, Cancel01Icon } from "@hugeicons/core-free-icons"
 import { useBooking, useBookingDispatch } from "./booking-context"
 
 const STEP_TITLES = [
@@ -28,7 +29,7 @@ export function WidgetHeader({ onClose }: WidgetHeaderProps) {
             onClick={() => dispatch({ type: "PREV_STEP" })}
             className="rounded-lg p-1 transition-colors hover:bg-gray-100"
           >
-            <ArrowLeft className="size-4 text-gray-500" />
+            <HugeiconsIcon icon={ArrowLeft02Icon} size={16} className="text-gray-500" />
           </button>
         )}
         <div>
@@ -46,7 +47,7 @@ export function WidgetHeader({ onClose }: WidgetHeaderProps) {
         onClick={onClose}
         className="rounded-lg p-1 transition-colors hover:bg-gray-100"
       >
-        <X className="size-4 text-gray-500" />
+        <HugeiconsIcon icon={Cancel01Icon} size={16} className="text-gray-500" />
       </button>
     </div>
   )

@@ -1,7 +1,8 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Phone, Shield, Loader2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { CallIcon, Shield01Icon, Loading03Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Card } from "@workspace/ui/components/card"
@@ -113,11 +114,11 @@ export function VerificationStep() {
       <Tabs defaultValue="phone" className="w-full">
         <TabsList className="grid w-full grid-cols-2 rounded-xl">
           <TabsTrigger value="phone" className="rounded-lg text-xs">
-            <Phone className="mr-1 size-3" />
+            <HugeiconsIcon icon={CallIcon} size={12} className="mr-1" />
             Telefon raqam
           </TabsTrigger>
           <TabsTrigger value="oneid" className="rounded-lg text-xs">
-            <Shield className="mr-1 size-3" />
+            <HugeiconsIcon icon={Shield01Icon} size={12} className="mr-1" />
             OneID
           </TabsTrigger>
         </TabsList>
@@ -172,7 +173,7 @@ export function VerificationStep() {
               </div>
               {verifying && (
                 <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-                  <Loader2 className="size-3 animate-spin" />
+                  <HugeiconsIcon icon={Loading03Icon} size={12} className="animate-spin" />
                   Tasdiqlanmoqda...
                 </div>
               )}
@@ -183,7 +184,7 @@ export function VerificationStep() {
         <TabsContent value="oneid" className="mt-3">
           <div className="flex flex-col items-center gap-4 py-4">
             <div className="flex size-16 items-center justify-center rounded-2xl bg-blue-50">
-              <Shield className="size-8" style={{ color: "var(--brand-primary)" }} />
+              <HugeiconsIcon icon={Shield01Icon} size={32} style={{ color: "var(--brand-primary)" }} />
             </div>
             <p className="text-center text-xs text-gray-500">
               OneID tizimi orqali shaxsingizni tasdiqlang
@@ -196,7 +197,7 @@ export function VerificationStep() {
             >
               {verifying ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  <HugeiconsIcon icon={Loading03Icon} size={16} className="mr-2 animate-spin" />
                   Tasdiqlanmoqda...
                 </>
               ) : (

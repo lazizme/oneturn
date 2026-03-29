@@ -1,7 +1,8 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Phone, Star } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Cancel01Icon, CallIcon, StarIcon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Separator } from "@workspace/ui/components/separator"
 import type { Booking } from "@workspace/types"
@@ -48,7 +49,7 @@ export function BookingDetailPanel({
                 onClick={onClose}
                 className="gap-1 text-xs"
               >
-                <X className="size-3.5" />
+                <HugeiconsIcon icon={Cancel01Icon} size={14} />
                 Yopish
               </Button>
               <span className="font-mono text-lg font-black text-gray-900">
@@ -65,12 +66,12 @@ export function BookingDetailPanel({
                 </h3>
                 <div className="mt-2 flex items-center gap-3">
                   <span className="flex items-center gap-1 text-sm" style={{ color: "var(--brand-muted)" }}>
-                    <Phone className="size-3.5" />
+                    <HugeiconsIcon icon={CallIcon} size={14} />
                     {booking.userPhone}
                   </span>
                 </div>
                 <div className="mt-1.5 flex items-center gap-1 text-sm" style={{ color: "var(--brand-muted)" }}>
-                  <Star className="size-3.5" style={{ color: "var(--brand-warning)" }} />
+                  <HugeiconsIcon icon={StarIcon} size={14} style={{ color: "var(--brand-warning)" }} />
                   Reyting: 94/100
                 </div>
               </div>

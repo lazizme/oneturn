@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Building2, Loader2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Building02Icon, Loading03Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -38,7 +39,7 @@ export default function LoginPage() {
             className="mx-auto mb-3 flex size-12 items-center justify-center rounded-xl text-white"
             style={{ backgroundColor: "var(--brand-primary)" }}
           >
-            <Building2 className="size-6" />
+            <HugeiconsIcon icon={Building02Icon} size={24} />
           </div>
           <h1 className="text-xl font-bold text-gray-900">OneTurn Dashboard</h1>
           <p className="mt-1 text-sm text-gray-500">
@@ -79,7 +80,7 @@ export default function LoginPage() {
             className="w-full rounded-xl"
             style={{ backgroundColor: "var(--brand-primary)" }}
           >
-            {loading && <Loader2 className="mr-2 size-4 animate-spin" />}
+            {loading && <HugeiconsIcon icon={Loading03Icon} size={16} className="mr-2 animate-spin" />}
             Kirish
           </Button>
         </form>

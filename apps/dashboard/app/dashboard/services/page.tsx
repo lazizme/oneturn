@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Plus,
-  Pencil,
-  Pause,
-  Play,
-  AlertTriangle,
-} from "lucide-react"
+  PlusSignIcon,
+  PencilEdit01Icon,
+  PauseIcon,
+  PlayIcon,
+  Alert01Icon,
+} from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Badge } from "@workspace/ui/components/badge"
 import { Skeleton } from "@workspace/ui/components/skeleton"
@@ -143,7 +144,7 @@ export default function ServicesPage() {
               setModalOpen(true)
             }}
           >
-            <Plus className="size-3.5" />
+            <HugeiconsIcon icon={PlusSignIcon} size={14} />
             Xizmat qo&apos;shish
           </Button>
         </div>
@@ -187,10 +188,10 @@ export default function ServicesPage() {
                 if (diff !== null && diffPercent !== null) {
                   if (diffPercent > 20) {
                     diffColor = "var(--brand-danger)"
-                    diffIcon = <AlertTriangle className="inline size-3" />
+                    diffIcon = <HugeiconsIcon icon={Alert01Icon} size={12} className="inline" />
                   } else if (diffPercent > 0) {
                     diffColor = "var(--brand-warning)"
-                    diffIcon = <AlertTriangle className="inline size-3" />
+                    diffIcon = <HugeiconsIcon icon={Alert01Icon} size={12} className="inline" />
                   }
                 }
 
@@ -246,7 +247,7 @@ export default function ServicesPage() {
                             setModalOpen(true)
                           }}
                         >
-                          <Pencil className="size-3.5 text-gray-500" />
+                          <HugeiconsIcon icon={PencilEdit01Icon} size={14} className="text-gray-500" />
                         </Button>
                         <Button
                           variant="ghost"
@@ -257,9 +258,9 @@ export default function ServicesPage() {
                           }
                         >
                           {service.isAvailable ? (
-                            <Pause className="size-3.5 text-gray-500" />
+                            <HugeiconsIcon icon={PauseIcon} size={14} className="text-gray-500" />
                           ) : (
-                            <Play className="size-3.5" style={{ color: "var(--brand-accent)" }} />
+                            <HugeiconsIcon icon={PlayIcon} size={14} style={{ color: "var(--brand-accent)" }} />
                           )}
                         </Button>
                       </div>

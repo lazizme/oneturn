@@ -10,7 +10,8 @@ import {
 } from "@workspace/ui/components/select"
 import { Button } from "@workspace/ui/components/button"
 import { Badge } from "@workspace/ui/components/badge"
-import { Plus, RefreshCw } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { PlusSignIcon, Refresh01Icon } from "@hugeicons/core-free-icons"
 import { mockBranches } from "@workspace/mock-data"
 import { useQueue } from "./queue-context"
 import { QueueColumn } from "./queue-column"
@@ -82,8 +83,10 @@ export function QueueBoard() {
           </Select>
 
           <Badge variant="secondary" className="rounded-full">
-            <RefreshCw
-              className={`mr-1 size-3 ${autoRefresh ? "animate-spin" : ""}`}
+            <HugeiconsIcon
+              icon={Refresh01Icon}
+              size={12}
+              className={`mr-1 ${autoRefresh ? "animate-spin" : ""}`}
               style={{ animationDuration: "3s" }}
             />
             {autoRefresh ? "Avto-yangilash" : "To'xtatilgan"}
@@ -100,7 +103,7 @@ export function QueueBoard() {
           variant="outline"
           onClick={addSimulatedBooking}
         >
-          <Plus className="mr-1 size-3" />
+          <HugeiconsIcon icon={PlusSignIcon} size={12} className="mr-1" />
           Simulyatsiya
         </Button>
       </div>

@@ -1,6 +1,7 @@
 "use client"
 
-import { Clock } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Clock01Icon } from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import { Badge } from "@workspace/ui/components/badge"
 import type { Service } from "@workspace/types"
@@ -40,7 +41,7 @@ export function ServiceStep() {
             {service.name}
           </h3>
           <div className="mt-2 flex items-center gap-1">
-            <Clock className="size-3 text-gray-400" />
+            <HugeiconsIcon icon={Clock01Icon} size={12} className="text-gray-400" />
             <Badge
               variant="secondary"
               className="rounded-full px-2 py-0.5 text-[10px]"

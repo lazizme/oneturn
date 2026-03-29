@@ -3,11 +3,13 @@
 import { useSearchParams } from "next/navigation"
 import { useMemo, Suspense } from "react"
 import Link from "next/link"
-import { Search, Star, Building2, ArrowRight } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Search01Icon, StarIcon, Building02Icon, ArrowRight02Icon } from "@hugeicons/core-free-icons"
 import { motion } from "framer-motion"
 import { citizenOrganizations } from "@workspace/mock-data"
 import type { Organization, Branch } from "@workspace/types"
 import { Navbar } from "@/components/layout/navbar"
+import { useBooking } from "@/lib/booking"
 import { getCategoryColor, getCategoryBg, getBusyInfo } from "@/lib/utils"
 
 interface OrgMatch {
@@ -41,6 +43,7 @@ function highlightMatch(text: string, query: string) {
 
 function SearchPageContent() {
   const searchParams = useSearchParams()
+  const { openBooking } = useBooking()
   const q = searchParams.get("q") || ""
 
   const { orgResults, serviceResults } = useMemo(() => {
@@ -148,12 +151,12 @@ function SearchPageContent() {
                           <div className="mt-2 flex items-center gap-3">
                             {org.rating && (
                               <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--c-warning)" }}>
-                                <Star className="size-3 fill-current" />
+                                <HugeiconsIcon icon={StarIcon} size={12} className="fill-current" />
                                 {org.rating.toFixed(1)}
                               </span>
                             )}
                             <span className="flex items-center gap-1 text-xs" style={{ color: "var(--c-muted)" }}>
-                              <Building2 className="size-3" />
+                              <HugeiconsIcon icon={Building02Icon} size={12} />
                               {org.branches.length} filial
                             </span>
                           </div>
@@ -228,10 +231,11 @@ function SearchPageContent() {
                             style={{ backgroundColor: "var(--c-primary)" }}
                             onClick={(e) => {
                               e.preventDefault()
-                              window.location.href = `/org/${org.id}/${branch.id}`
+                              e.stopPropagation()
+                              openBooking(org, branch)
                             }}
                           >
-                            Navbat olish <ArrowRight className="ml-1 inline size-3.5" />
+                            Navbat olish <HugeiconsIcon icon={ArrowRight02Icon} size={14} className="ml-1 inline" />
                           </button>
                         </Link>
                       </motion.div>
@@ -253,7 +257,7 @@ function SearchPageContent() {
               className="mb-6 flex size-16 items-center justify-center rounded-full"
               style={{ backgroundColor: "var(--c-surface)" }}
             >
-              <Search className="size-7" style={{ color: "var(--c-muted)" }} />
+              <HugeiconsIcon icon={Search01Icon} size={28} style={{ color: "var(--c-muted)" }} />
             </div>
             <h2 className="text-xl font-semibold" style={{ color: "var(--c-text)" }}>
               &ldquo;{q}&rdquo; bo&apos;yicha natija topilmadi.

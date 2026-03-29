@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { Plus, Pencil, Trash2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { PlusSignIcon, PencilEdit01Icon, Delete01Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Badge } from "@workspace/ui/components/badge"
 import { Skeleton } from "@workspace/ui/components/skeleton"
@@ -118,7 +119,7 @@ export default function StaffPage() {
               setModalOpen(true)
             }}
           >
-            <Plus className="size-3.5" />
+            <HugeiconsIcon icon={PlusSignIcon} size={14} />
             Xodim qo&apos;shish
           </Button>
         </div>
@@ -230,7 +231,7 @@ export default function StaffPage() {
                             setModalOpen(true)
                           }}
                         >
-                          <Pencil className="size-3.5 text-gray-500" />
+                          <HugeiconsIcon icon={PencilEdit01Icon} size={14} className="text-gray-500" />
                         </Button>
                         {!isAdmin && (
                           <Button
@@ -239,7 +240,7 @@ export default function StaffPage() {
                             className="size-7 rounded-lg p-0"
                             onClick={() => setDeleteStaff(member)}
                           >
-                            <Trash2 className="size-3.5 text-gray-500" />
+                            <HugeiconsIcon icon={Delete01Icon} size={14} className="text-gray-500" />
                           </Button>
                         )}
                       </div>

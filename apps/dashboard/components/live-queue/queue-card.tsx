@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Check, X, Clock, Zap } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon, Cancel01Icon, Clock01Icon, ZapIcon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Badge } from "@workspace/ui/components/badge"
 import { Card } from "@workspace/ui/components/card"
@@ -71,11 +72,11 @@ export function QueueCard({
           >
             {booking.type === "live" ? (
               <span className="flex items-center gap-1">
-                <Zap className="size-2.5" /> Jonli
+                <HugeiconsIcon icon={ZapIcon} size={10} /> Jonli
               </span>
             ) : (
               <span className="flex items-center gap-1">
-                <Clock className="size-2.5" /> Bron
+                <HugeiconsIcon icon={Clock01Icon} size={10} /> Bron
               </span>
             )}
           </Badge>
@@ -110,7 +111,7 @@ export function QueueCard({
               style={{ backgroundColor: "var(--brand-accent)" }}
               onClick={onArrived}
             >
-              <Check className="mr-1 size-3" />
+              <HugeiconsIcon icon={Tick02Icon} size={12} className="mr-1" />
               Keldi
             </Button>
             <Button
@@ -123,7 +124,7 @@ export function QueueCard({
               }}
               onClick={onNoShow}
             >
-              <X className="size-3" />
+              <HugeiconsIcon icon={Cancel01Icon} size={12} />
             </Button>
           </div>
         )}
@@ -149,7 +150,7 @@ export function QueueCard({
               style={{ backgroundColor: "var(--brand-accent)" }}
               onClick={onCompleted}
             >
-              <Check className="mr-1 size-3" />
+              <HugeiconsIcon icon={Tick02Icon} size={12} className="mr-1" />
               Yakunlandi
             </Button>
           </div>

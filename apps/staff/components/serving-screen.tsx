@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Check, AlertTriangle, Timer } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon, Alert01Icon, Timer01Icon } from "@hugeicons/core-free-icons"
 import { useStaff } from "@/context/staff-context"
 import { mockBranches } from "@workspace/mock-data"
 import { toast } from "sonner"
@@ -104,7 +105,7 @@ export function ServingScreen() {
 
       {/* Timer */}
       <div className="mb-2 flex items-center gap-3">
-        <Timer className="size-5" style={{ color: timerColor }} />
+        <HugeiconsIcon icon={Timer01Icon} size={20} style={{ color: timerColor }} />
         <span
           className="font-mono text-4xl font-bold"
           style={{ color: timerColor }}
@@ -119,7 +120,7 @@ export function ServingScreen() {
           className="mb-2 flex items-center gap-1.5 text-sm"
           style={{ color: timerColor }}
         >
-          <AlertTriangle className="size-3.5" />
+          <HugeiconsIcon icon={Alert01Icon} size={14} />
           +{overtimeMin} daq kechikmoqda
         </p>
       )}
@@ -138,7 +139,7 @@ export function ServingScreen() {
         className="mb-4 flex w-full max-w-md items-center justify-center gap-3 rounded-2xl py-6 text-xl font-bold uppercase tracking-wide text-white transition-all duration-75 hover:brightness-110 active:scale-[0.97]"
         style={{ backgroundColor: "var(--staff-blue)", minHeight: "80px" }}
       >
-        <Check className="size-6" />
+        <HugeiconsIcon icon={Tick02Icon} size={24} />
         Xizmat yakunlandi
       </button>
 

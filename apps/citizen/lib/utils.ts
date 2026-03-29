@@ -1,4 +1,5 @@
 import type { OrgType } from "@workspace/types"
+import { Building02Icon, BankIcon, Hospital01Icon, ClipboardIcon } from "@hugeicons/core-free-icons"
 
 /** Category color based on org type */
 export function getCategoryColor(type: OrgType): string {
@@ -30,13 +31,13 @@ export function getCategoryLabel(type: OrgType): string {
   }
 }
 
-/** Category icon emoji */
-export function getCategoryIcon(type: OrgType): string {
+/** Category icon definition (hugeicons) */
+export function getCategoryIcon(type: OrgType) {
   switch (type) {
-    case "government": return "🏛"
-    case "bank": return "🏦"
-    case "clinic": return "🏥"
-    default: return "📋"
+    case "government": return Building02Icon
+    case "bank": return BankIcon
+    case "clinic": return Hospital01Icon
+    default: return ClipboardIcon
   }
 }
 

@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { CheckmarkCircle02Icon } from "@hugeicons/core-free-icons"
 
 export function EmptyScreen() {
   return (
@@ -12,8 +13,10 @@ export function EmptyScreen() {
       transition={{ duration: 0.2 }}
       className="flex flex-1 flex-col items-center justify-center"
     >
-      <CheckCircle2
-        className="mb-4 size-16"
+      <HugeiconsIcon
+        icon={CheckmarkCircle02Icon}
+        size={64}
+        className="mb-4"
         style={{ color: "var(--staff-green)" }}
       />
       <p

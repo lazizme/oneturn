@@ -2,7 +2,8 @@
 
 import { useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Building2, Delete } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Building02Icon, Delete01Icon } from "@hugeicons/core-free-icons"
 
 const VALID_PINS: Record<
   string,
@@ -110,7 +111,7 @@ export function PinLogin({ branchName, onLogin }: PinLoginProps) {
           className="flex size-10 items-center justify-center rounded-xl text-white"
           style={{ backgroundColor: "var(--staff-blue)" }}
         >
-          <Building2 className="size-5" />
+          <HugeiconsIcon icon={Building02Icon} size={20} />
         </div>
         <span
           className="text-2xl font-bold"
@@ -173,7 +174,7 @@ export function PinLogin({ branchName, onLogin }: PinLoginProps) {
                       color: "var(--staff-muted)",
                     }}
                   >
-                    <Delete className="size-6" />
+                    <HugeiconsIcon icon={Delete01Icon} size={24} />
                   </button>
                 )
               }

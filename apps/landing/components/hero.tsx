@@ -1,6 +1,7 @@
 "use client"
 
-import { Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon } from "@hugeicons/core-free-icons"
 
 export function Hero() {
   return (
@@ -72,7 +73,7 @@ export function Hero() {
                 key={item}
                 className="flex items-center gap-1.5 text-sm text-white/40"
               >
-                <Check className="size-3.5" style={{ color: "#10B981" }} />
+                <HugeiconsIcon icon={Tick02Icon} size={14} style={{ color: "#10B981" }} />
                 {item}
               </span>
             ))}

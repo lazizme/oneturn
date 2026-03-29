@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Loader2, Building2, Upload } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Loading03Icon, Building02Icon, Upload01Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -99,7 +100,7 @@ export function OrgSettings() {
                 className="mb-2 size-16 rounded-lg object-contain"
               />
             ) : (
-              <Upload className="mb-2 size-8 text-gray-400" />
+              <HugeiconsIcon icon={Upload01Icon} size={32} className="mb-2 text-gray-400" />
             )}
             <p className="text-sm font-medium text-gray-600">
               Rasm yuklash yoki bu yerga tashlang
@@ -160,7 +161,7 @@ export function OrgSettings() {
         >
           {saving ? (
             <>
-              <Loader2 className="mr-2 size-3.5 animate-spin" />
+              <HugeiconsIcon icon={Loading03Icon} size={14} className="mr-2 animate-spin" />
               Saqlanmoqda...
             </>
           ) : (
@@ -191,7 +192,7 @@ export function OrgSettings() {
               />
             ) : (
               <div className="flex size-10 items-center justify-center rounded-lg bg-white/20">
-                <Building2 className="size-5 text-white" />
+                <HugeiconsIcon icon={Building02Icon} size={20} className="text-white" />
               </div>
             )}
             <div className="text-white">

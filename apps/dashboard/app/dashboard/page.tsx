@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import {
-  CalendarCheck,
-  UserX,
-  Clock,
-  Building,
-} from "lucide-react"
+  CalendarCheckIn01Icon,
+  UserBlock01Icon,
+  Clock01Icon,
+  Building01Icon,
+} from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import { mockBookings, mockBranches } from "@workspace/mock-data"
 import { Topbar } from "@/components/topbar"
@@ -87,7 +87,7 @@ export default function OverviewPage() {
             value={todayCount}
             delta="+12 kechadan"
             deltaPositive={true}
-            icon={CalendarCheck}
+            icon={CalendarCheckIn01Icon}
             color="var(--brand-primary)"
           />
           <StatCard
@@ -96,7 +96,7 @@ export default function OverviewPage() {
             suffix="%"
             delta="-2% kechadan"
             deltaPositive={true}
-            icon={UserX}
+            icon={UserBlock01Icon}
             color="var(--brand-danger)"
           />
           <StatCard
@@ -105,14 +105,14 @@ export default function OverviewPage() {
             suffix=" daq"
             delta="-3 daq kechadan"
             deltaPositive={true}
-            icon={Clock}
+            icon={Clock01Icon}
             color="var(--brand-warning)"
           />
           <StatCard
             label="Faol filiallar"
             value={activeBranches}
             suffix={`/${mockBranches.length}`}
-            icon={Building}
+            icon={Building01Icon}
             color="var(--brand-accent)"
           />
         </div>

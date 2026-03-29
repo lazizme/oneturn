@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useRef, useCallback } from "react"
-import { Loader2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Loading03Icon, SmartPhone01Icon, AlarmClockIcon, Cancel01Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Label } from "@workspace/ui/components/label"
 import { Card } from "@workspace/ui/components/card"
@@ -27,7 +28,7 @@ const MOCK_VALUES: Record<string, string> = {
 
 interface Template {
   id: string
-  icon: string
+  icon: typeof SmartPhone01Icon
   title: string
   defaultText: string
 }
@@ -35,21 +36,21 @@ interface Template {
 const TEMPLATES: Template[] = [
   {
     id: "confirmation",
-    icon: "📱",
+    icon: SmartPhone01Icon,
     title: "Tasdiqlash SMS",
     defaultText:
       "Hurmatli {ism}, navbatingiz tasdiqlandi.\nNavbat: {navbat} | Xizmat: {xizmat}\nVaqt: {vaqt} | Filial: {filial}\nO'zgartirish: {link}",
   },
   {
     id: "reminder",
-    icon: "⏰",
+    icon: AlarmClockIcon,
     title: "Eslatma SMS",
     defaultText:
       "Hurmatli {ism}, navbatingiz 30 daqiqadan keyin.\nNavbat: {navbat} | Filial: {filial}\nIltimos, o'z vaqtida keling.",
   },
   {
     id: "cancellation",
-    icon: "❌",
+    icon: Cancel01Icon,
     title: "Bekor qilish SMS",
     defaultText:
       "Hurmatli {ism}, navbatingiz bekor qilindi.\nXizmat: {xizmat} | Filial: {filial}\nYangi navbat: {link}",
@@ -108,7 +109,7 @@ function TemplateEditor({ template, value, onChange }: TemplateEditorProps) {
   return (
     <Card className="rounded-xl p-5">
       <h3 className="mb-4 flex items-center gap-2 text-sm font-bold text-gray-900">
-        <span>{template.icon}</span>
+        <HugeiconsIcon icon={template.icon} size={16} />
         {template.title}
       </h3>
 
@@ -195,7 +196,7 @@ export function SmsSettings() {
       >
         {saving ? (
           <>
-            <Loader2 className="mr-2 size-3.5 animate-spin" />
+            <HugeiconsIcon icon={Loading03Icon} size={14} className="mr-2 animate-spin" />
             Saqlanmoqda...
           </>
         ) : (

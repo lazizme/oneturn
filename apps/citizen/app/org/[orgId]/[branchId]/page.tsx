@@ -4,10 +4,12 @@ import { use, useMemo } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import { ArrowLeft, MapPin, Clock, CheckCircle, XCircle } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowLeft02Icon, Location01Icon, Clock01Icon, CheckmarkCircle01Icon, CancelCircleIcon, Search01Icon } from "@hugeicons/core-free-icons"
 import { citizenOrganizations, mockPeakHours } from "@workspace/mock-data"
 import { Navbar } from "@/components/layout/navbar"
 import { useLocation } from "@/context/location-context"
+import { useBooking } from "@/lib/booking"
 import { getBusyInfo, getDistanceKm } from "@/lib/utils"
 
 const BranchMap = dynamic(() => import("./branch-map"), { ssr: false })
@@ -19,6 +21,7 @@ interface PageProps {
 export default function BranchDetailPage({ params }: PageProps) {
   const { orgId, branchId } = use(params)
   const { location } = useLocation()
+  const { openBooking } = useBooking()
 
   const org = citizenOrganizations.find((o) => o.id === orgId)
   const branch = org?.branches.find((b) => b.id === branchId)
@@ -57,7 +60,7 @@ export default function BranchDetailPage({ params }: PageProps) {
             className="mb-4 flex size-20 items-center justify-center rounded-full text-3xl"
             style={{ backgroundColor: "var(--c-surface)" }}
           >
-            🔍
+            <HugeiconsIcon icon={Search01Icon} size={32} />
           </div>
           <h1 className="mb-2 text-2xl font-bold" style={{ color: "var(--c-text)" }}>
             Filial topilmadi
@@ -93,7 +96,7 @@ export default function BranchDetailPage({ params }: PageProps) {
             className="mb-3 inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-80"
             style={{ color: "var(--c-primary)" }}
           >
-            <ArrowLeft className="size-4" />
+            <HugeiconsIcon icon={ArrowLeft02Icon} size={16} />
             {org.name}
           </Link>
 
@@ -105,7 +108,7 @@ export default function BranchDetailPage({ params }: PageProps) {
                     className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
                     style={{ backgroundColor: "var(--c-accent-light)", color: "var(--c-accent)" }}
                   >
-                    <CheckCircle className="size-3" />
+                    <HugeiconsIcon icon={CheckmarkCircle01Icon} size={12} />
                     Ochiq
                   </span>
                 ) : (
@@ -113,7 +116,7 @@ export default function BranchDetailPage({ params }: PageProps) {
                     className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
                     style={{ backgroundColor: "#FEF2F2", color: "var(--c-danger)" }}
                   >
-                    <XCircle className="size-3" />
+                    <HugeiconsIcon icon={CancelCircleIcon} size={12} />
                     Yopiq
                   </span>
                 )}
@@ -123,11 +126,11 @@ export default function BranchDetailPage({ params }: PageProps) {
               </h1>
               <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "var(--c-muted)" }}>
                 <span className="flex items-center gap-1">
-                  <MapPin className="size-3.5" />
+                  <HugeiconsIcon icon={Location01Icon} size={14} />
                   {branch.address} &middot; {dist.toFixed(1)} km
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock className="size-3.5" />
+                  <HugeiconsIcon icon={Clock01Icon} size={14} />
                   Dushanba–Shanba {branch.workingHours.open}–{branch.workingHours.close}
                 </span>
               </div>
@@ -237,13 +240,13 @@ export default function BranchDetailPage({ params }: PageProps) {
                     ~{service.estimatedDurationMin} daq
                   </div>
                 </div>
-                <a
-                  href="#"
+                <button
+                  onClick={() => openBooking(org, branch, service.id)}
                   className="rounded-xl px-4 py-2 text-xs font-semibold text-white transition-colors"
                   style={{ backgroundColor: "var(--c-primary)" }}
                 >
                   Navbat olish
-                </a>
+                </button>
               </div>
             ))}
           </div>

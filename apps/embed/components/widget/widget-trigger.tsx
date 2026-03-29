@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Building2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Building02Icon } from "@hugeicons/core-free-icons"
 
 interface WidgetTriggerProps {
   onClick: () => void
@@ -19,7 +20,7 @@ export function WidgetTrigger({ onClick }: WidgetTriggerProps) {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
-      <Building2 className="size-5" />
+      <HugeiconsIcon icon={Building02Icon} size={20} />
       Navbat olish
       <motion.span
         className="absolute -top-1 -right-1 size-3 rounded-full bg-green-400"

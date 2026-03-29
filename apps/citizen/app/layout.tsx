@@ -4,7 +4,7 @@ import { Toaster } from "sonner"
 import "@workspace/ui/globals.css"
 import "leaflet/dist/leaflet.css"
 import "./globals.css"
-import { LocationProvider } from "@/context/location-context"
+import { Providers } from "@/components/providers"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -32,9 +32,9 @@ export default function RootLayout({
         className={`${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         style={{ fontFamily: "var(--font-dm-sans)", backgroundColor: "var(--c-bg)", color: "var(--c-text)" }}
       >
-        <LocationProvider>
+        <Providers>
           {children}
-        </LocationProvider>
+        </Providers>
         <Toaster position="bottom-center" />
       </body>
     </html>

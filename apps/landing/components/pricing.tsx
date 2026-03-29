@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Check, X } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon, Cancel01Icon } from "@hugeicons/core-free-icons"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 interface Plan {
@@ -164,9 +165,9 @@ export function Pricing() {
                 {plan.features.map((f) => (
                   <li key={f.name} className="flex items-center gap-2.5 text-sm">
                     {f.included ? (
-                      <Check className="size-4 flex-shrink-0" style={{ color: "#10B981" }} />
+                      <HugeiconsIcon icon={Tick02Icon} size={16} className="flex-shrink-0" style={{ color: "#10B981" }} />
                     ) : (
-                      <X className="size-4 flex-shrink-0 text-gray-300" />
+                      <HugeiconsIcon icon={Cancel01Icon} size={16} className="flex-shrink-0 text-gray-300" />
                     )}
                     <span className={f.included ? "text-gray-700" : "text-gray-400"}>
                       {f.name}

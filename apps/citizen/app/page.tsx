@@ -1,12 +1,14 @@
 "use client"
 
-import { useState, useMemo, useRef, Suspense } from "react"
+import { type ReactNode, useState, useMemo, useRef, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
-import { Star, Users, Clock, ChevronRight, ArrowRight } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { StarIcon, UserGroupIcon, Clock01Icon, ArrowRight01Icon, ArrowRight02Icon, Building02Icon, BankIcon, Hospital01Icon, ClipboardIcon } from "@hugeicons/core-free-icons"
 import { Navbar } from "@/components/layout/navbar"
 import { useLocation } from "@/context/location-context"
+import { useBooking } from "@/lib/booking"
 import { citizenOrganizations, allCitizenBranches } from "@workspace/mock-data"
 import type { OrgType } from "@workspace/types"
 import {
@@ -20,12 +22,12 @@ import {
 
 type CategoryFilter = "all" | OrgType
 
-const categoryPills: { value: CategoryFilter; label: string }[] = [
+const categoryPills: { value: CategoryFilter; label: ReactNode }[] = [
   { value: "all", label: "Barchasi" },
-  { value: "government", label: "🏛 Davlat" },
-  { value: "bank", label: "🏦 Banklar" },
-  { value: "clinic", label: "🏥 Klinikalar" },
-  { value: "other", label: "📋 Boshqa" },
+  { value: "government", label: <><HugeiconsIcon icon={Building02Icon} size={14} /> Davlat</> },
+  { value: "bank", label: <><HugeiconsIcon icon={BankIcon} size={14} /> Banklar</> },
+  { value: "clinic", label: <><HugeiconsIcon icon={Hospital01Icon} size={14} /> Klinikalar</> },
+  { value: "other", label: <><HugeiconsIcon icon={ClipboardIcon} size={14} /> Boshqa</> },
 ]
 
 const categoryTypes: OrgType[] = ["government", "bank", "clinic", "other"]
@@ -40,6 +42,7 @@ function HomePageContent() {
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
   const { location } = useLocation()
+  const { openBooking } = useBooking()
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all")
   const nearYouRef = useRef<HTMLDivElement>(null)
 
@@ -98,7 +101,7 @@ function HomePageContent() {
               <button
                 key={pill.value}
                 onClick={() => setActiveCategory(pill.value)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                   activeCategory === pill.value
                     ? "bg-[var(--c-primary)] text-white"
                     : "bg-white border border-[var(--c-border)] text-[var(--c-muted)] hover:shadow-sm"
@@ -169,21 +172,28 @@ function HomePageContent() {
                       <span>{distance.toFixed(1)} km</span>
                       <span>·</span>
                       <span className="flex items-center gap-1">
-                        <Clock className="size-3" />
+                        <HugeiconsIcon icon={Clock01Icon} size={12} />
                         ~{branch.avgWaitMinutes} daq
                       </span>
                       <span>·</span>
                       <span className="flex items-center gap-1">
-                        <Users className="size-3" />
+                        <HugeiconsIcon icon={UserGroupIcon} size={12} />
                         {branch.currentQueue}
                       </span>
                     </div>
 
                     {/* Button */}
                     <div className="mt-auto pt-3">
-                      <span className="inline-flex items-center gap-1 bg-[var(--c-primary)] text-white rounded-xl px-4 py-2 text-sm font-semibold">
-                        Navbat olish <ArrowRight className="size-3.5" />
-                      </span>
+                      <button
+                        className="inline-flex items-center gap-1 bg-[var(--c-primary)] text-white rounded-xl px-4 py-2 text-sm font-semibold"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          if (org) openBooking(org, branch)
+                        }}
+                      >
+                        Navbat olish <HugeiconsIcon icon={ArrowRight02Icon} size={14} />
+                      </button>
                     </div>
                   </div>
                 </Link>
@@ -207,7 +217,7 @@ function HomePageContent() {
                   className="rounded-2xl p-6 cursor-pointer transition-all hover:shadow-md hover:-translate-y-0.5"
                   style={{ backgroundColor: getCategoryBg(type) }}
                 >
-                  <span className="text-3xl">{getCategoryIcon(type)}</span>
+                  <HugeiconsIcon icon={getCategoryIcon(type)} size={32} />
                   <p
                     className="mt-3 text-lg font-bold"
                     style={{ color: "var(--c-text)" }}
@@ -236,7 +246,7 @@ function HomePageContent() {
               className="flex items-center gap-1 text-sm font-medium"
               style={{ color: "var(--c-primary)" }}
             >
-              Barchasini ko&apos;rish <ChevronRight className="size-4" />
+              Barchasini ko&apos;rish <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
             </Link>
           </div>
 
@@ -301,7 +311,7 @@ function HomePageContent() {
                       >
                         {org.rating && (
                           <span className="flex items-center gap-1">
-                            <Star className="size-3 fill-amber-400 text-amber-400" />
+                            <HugeiconsIcon icon={StarIcon} size={12} className="fill-amber-400 text-amber-400" />
                             {org.rating.toFixed(1)}
                           </span>
                         )}

@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import { Badge } from "@workspace/ui/components/badge"
 import type { Booking, BookingStatus } from "@workspace/types"
@@ -40,7 +41,7 @@ export function RecentBookings({ bookings, branches }: RecentBookingsProps) {
           style={{ color: "var(--brand-primary)" }}
         >
           Barchasi
-          <ArrowRight className="size-3" />
+          <HugeiconsIcon icon={ArrowRight02Icon} size={12} />
         </Link>
       </div>
       <div className="space-y-0">

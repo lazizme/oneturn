@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { MapPin, ChevronDown, Loader2 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Location01Icon, ArrowDown01Icon, Loading03Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import {
   Select,
@@ -83,9 +84,9 @@ export function LocationStep() {
         style={{ backgroundColor: "var(--brand-primary)" }}
       >
         {loading ? (
-          <Loader2 className="size-5 animate-spin" />
+          <HugeiconsIcon icon={Loading03Icon} size={20} className="animate-spin" />
         ) : (
-          <MapPin className="size-5" />
+          <HugeiconsIcon icon={Location01Icon} size={20} />
         )}
         {loading ? "Aniqlanmoqda..." : "Joylashuvimni aniqlash"}
       </Button>

@@ -1,54 +1,54 @@
 "use client"
 
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  MapPin,
-  Clock,
-  ArrowRightLeft,
-  Star,
-  CalendarDays,
-  MessageSquare,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+  Location01Icon,
+  Clock01Icon,
+  ArrowLeftRightIcon,
+  StarIcon,
+  Calendar01Icon,
+  Message01Icon,
+} from "@hugeicons/core-free-icons"
 
 interface Feature {
-  icon: LucideIcon
+  icon: any
   title: string
   description: string
 }
 
 const features: Feature[] = [
   {
-    icon: MapPin,
+    icon: Location01Icon,
     title: "Xaritada filiallar",
     description:
       "Band indeks bilan. Qaysi filial bo'sh ekanligini bir ko'rishda biling.",
   },
   {
-    icon: Clock,
+    icon: Clock01Icon,
     title: "Kutish vaqti",
     description: "O'tgan ma'lumotlar asosida aniq hisoblangan kutish vaqti.",
   },
   {
-    icon: ArrowRightLeft,
+    icon: ArrowLeftRightIcon,
     title: "Smart yo'naltirish",
     description:
       '"A filial band. B filial 11 daq uzoqroq, lekin 26 daq tejaysiz."',
   },
   {
-    icon: Star,
+    icon: StarIcon,
     title: "Ishonch reytingi",
     description:
       "Vaqtida kelganlar yuqori reyting oladi. Tizim ikkala tomon uchun adolatli.",
   },
   {
-    icon: CalendarDays,
+    icon: Calendar01Icon,
     title: "Bron + jonli navbat",
     description:
       "Oldindan rejalash yoki hozir borish — ikki model, bir platforma.",
   },
   {
-    icon: MessageSquare,
+    icon: Message01Icon,
     title: "SMS va eslatmalar",
     description: "30 daqiqa oldin eslatma. O'zgartirish uchun bir tap.",
   },
@@ -82,7 +82,7 @@ export function Features() {
                 transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${100 + i * 80}ms`,
               }}
             >
-              <feature.icon className="mb-4 size-6 text-white transition-colors group-hover:text-[#10B981]" />
+              <HugeiconsIcon icon={feature.icon} size={24} className="mb-4 text-white transition-colors group-hover:text-[#10B981]" />
               <h3 className="mb-2 text-base font-bold text-white">
                 {feature.title}
               </h3>

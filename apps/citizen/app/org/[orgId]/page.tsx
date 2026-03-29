@@ -4,10 +4,12 @@ import { use, useMemo, useState } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import { MapPin, Clock, Users, Star, ArrowRight, Navigation } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Location01Icon, Clock01Icon, UserGroupIcon, StarIcon, ArrowRight02Icon, Navigation01Icon, Search01Icon, BulbIcon } from "@hugeicons/core-free-icons"
 import { citizenOrganizations, generateRatingBreakdown } from "@workspace/mock-data"
 import { Navbar } from "@/components/layout/navbar"
 import { useLocation } from "@/context/location-context"
+import { useBooking } from "@/lib/booking"
 import {
   getCategoryColor,
   getCategoryBg,
@@ -34,6 +36,7 @@ function formatServed(n: number): string {
 export default function OrgDetailPage({ params }: PageProps) {
   const { orgId } = use(params)
   const { location } = useLocation()
+  const { openBooking } = useBooking()
   const [sortBy, setSortBy] = useState<"distance" | "wait">("distance")
 
   const org = citizenOrganizations.find((o) => o.id === orgId)
@@ -84,7 +87,7 @@ export default function OrgDetailPage({ params }: PageProps) {
             className="mb-4 flex size-20 items-center justify-center rounded-full text-3xl"
             style={{ backgroundColor: "var(--c-surface)" }}
           >
-            🔍
+            <HugeiconsIcon icon={Search01Icon} size={32} />
           </div>
           <h1 className="mb-2 text-2xl font-bold" style={{ color: "var(--c-text)" }}>
             Tashkilot topilmadi
@@ -135,7 +138,7 @@ export default function OrgDetailPage({ params }: PageProps) {
                   className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold"
                   style={{ backgroundColor: catColor, color: "#fff" }}
                 >
-                  {getCategoryIcon(org.type)} {getCategoryLabel(org.type)}
+                  <HugeiconsIcon icon={getCategoryIcon(org.type)} size={14} /> {getCategoryLabel(org.type)}
                 </span>
               </div>
               {org.description && (
@@ -146,7 +149,7 @@ export default function OrgDetailPage({ params }: PageProps) {
               <div className="flex flex-wrap items-center gap-4 text-sm" style={{ color: "var(--c-text)" }}>
                 {org.rating && (
                   <span className="flex items-center gap-1 font-medium">
-                    <Star className="size-4 fill-amber-400 text-amber-400" />
+                    <HugeiconsIcon icon={StarIcon} size={16} className="fill-amber-400 text-amber-400" />
                     {org.rating.toFixed(1)}
                   </span>
                 )}
@@ -271,15 +274,15 @@ export default function OrgDetailPage({ params }: PageProps) {
                   </h3>
                   <div className="mb-3 flex flex-wrap items-center gap-3 text-xs" style={{ color: "var(--c-muted)" }}>
                     <span className="flex items-center gap-1">
-                      <MapPin className="size-3.5" />
+                      <HugeiconsIcon icon={Location01Icon} size={14} />
                       {branch.address} &middot; {dist.toFixed(1)} km
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="size-3.5" />
+                      <HugeiconsIcon icon={Clock01Icon} size={14} />
                       ~{branch.avgWaitMinutes} daq
                     </span>
                     <span className="flex items-center gap-1">
-                      <Users className="size-3.5" />
+                      <HugeiconsIcon icon={UserGroupIcon} size={14} />
                       {branch.currentQueue} navbatda
                     </span>
                     <span>
@@ -314,7 +317,7 @@ export default function OrgDetailPage({ params }: PageProps) {
                       className="mb-4 flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs"
                       style={{ backgroundColor: "#EFF6FF", color: "var(--c-primary)" }}
                     >
-                      <span>💡</span>
+                      <HugeiconsIcon icon={BulbIcon} size={16} />
                       <span className="font-medium">
                         {leastBusyBranch.name} bo&apos;shroq —{" "}
                         {branch.avgWaitMinutes - leastBusyBranch.avgWaitMinutes} daqiqa tejaysiz
@@ -331,17 +334,17 @@ export default function OrgDetailPage({ params }: PageProps) {
                       className="flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50"
                       style={{ borderColor: "var(--c-border)", color: "var(--c-text)" }}
                     >
-                      <Navigation className="size-3.5" />
+                      <HugeiconsIcon icon={Navigation01Icon} size={14} />
                       Yo&apos;l ko&apos;rsatish
                     </a>
-                    <Link
-                      href={`/org/${orgId}/${branch.id}`}
+                    <button
+                      onClick={() => openBooking(org, branch)}
                       className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium text-white transition-colors"
                       style={{ backgroundColor: "var(--c-primary)" }}
                     >
                       Navbat olish
-                      <ArrowRight className="size-3.5" />
-                    </Link>
+                      <HugeiconsIcon icon={ArrowRight02Icon} size={14} />
+                    </button>
                   </div>
                 </motion.div>
               )
@@ -383,9 +386,10 @@ export default function OrgDetailPage({ params }: PageProps) {
                   </div>
                   <div className="mt-1 flex items-center justify-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
+                      <HugeiconsIcon
                         key={star}
-                        className="size-4"
+                        icon={StarIcon}
+                        size={16}
                         style={{
                           color: star <= Math.round(org.rating!) ? "#F59E0B" : "#E2E8F0",
                           fill: star <= Math.round(org.rating!) ? "#F59E0B" : "transparent",

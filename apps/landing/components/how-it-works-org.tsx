@@ -1,7 +1,8 @@
 "use client"
 
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-import { Copy, Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Copy01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
 import { useState } from "react"
 
 const steps = [
@@ -140,11 +141,11 @@ export function HowItWorksOrg() {
                       >
                         {copied ? (
                           <span className="flex items-center gap-1">
-                            <Check className="size-3" /> Nusxalandi
+                            <HugeiconsIcon icon={Tick02Icon} size={12} /> Nusxalandi
                           </span>
                         ) : (
                           <span className="flex items-center gap-1">
-                            <Copy className="size-3" /> Nusxa
+                            <HugeiconsIcon icon={Copy01Icon} size={12} /> Nusxa
                           </span>
                         )}
                       </button>

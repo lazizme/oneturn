@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Copy, Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Copy01Icon, Tick02Icon, Building02Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Label } from "@workspace/ui/components/label"
 import { Card } from "@workspace/ui/components/card"
@@ -206,12 +207,12 @@ export function WidgetSettings() {
             >
               {copied ? (
                 <>
-                  <Check className="size-3" />
-                  Nusxalandi ✓
+                  <HugeiconsIcon icon={Tick02Icon} size={12} />
+                  Nusxalandi
                 </>
               ) : (
                 <>
-                  <Copy className="size-3" />
+                  <HugeiconsIcon icon={Copy01Icon} size={12} />
                   Nusxa olish
                 </>
               )}
@@ -269,7 +270,7 @@ export function WidgetSettings() {
               }`}
               style={{ backgroundColor: selectedColor }}
             >
-              🏛 Navbat
+              <HugeiconsIcon icon={Building02Icon} size={14} /> Navbat
               <span className="text-[10px]">→</span>
             </button>
           </div>

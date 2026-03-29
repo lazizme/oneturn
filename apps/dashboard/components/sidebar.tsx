@@ -2,54 +2,55 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Building2,
-  BarChart3,
-  ClipboardList,
-  MapPin,
-  Wrench,
-  Users,
-  LineChart,
-  Settings,
-  LogOut,
-} from "lucide-react"
+  Building02Icon,
+  ChartBarIncreasingIcon,
+  ClipboardIcon,
+  Location01Icon,
+  Wrench01Icon,
+  UserGroupIcon,
+  ChartLineData01Icon,
+  Settings01Icon,
+  Logout01Icon,
+} from "@hugeicons/core-free-icons"
 import { cn } from "@workspace/ui/lib/utils"
 
 const navItems = [
   {
     label: "Umumiy ko'rinish",
     href: "/dashboard",
-    icon: BarChart3,
+    icon: ChartBarIncreasingIcon,
   },
   {
     label: "Bronlar tarixi",
     href: "/dashboard/bookings",
-    icon: ClipboardList,
+    icon: ClipboardIcon,
   },
   {
     label: "Filiallar",
     href: "/dashboard/branches",
-    icon: MapPin,
+    icon: Location01Icon,
   },
   {
     label: "Xizmatlar",
     href: "/dashboard/services",
-    icon: Wrench,
+    icon: Wrench01Icon,
   },
   {
     label: "Xodimlar",
     href: "/dashboard/staff",
-    icon: Users,
+    icon: UserGroupIcon,
   },
   {
     label: "Analitika",
     href: "/dashboard/analytics",
-    icon: LineChart,
+    icon: ChartLineData01Icon,
   },
   {
     label: "Sozlamalar",
     href: "/dashboard/settings",
-    icon: Settings,
+    icon: Settings01Icon,
   },
 ]
 
@@ -64,7 +65,7 @@ export function Sidebar() {
           className="flex size-8 items-center justify-center rounded-lg text-white"
           style={{ backgroundColor: "var(--brand-primary)" }}
         >
-          <Building2 className="size-4" />
+          <HugeiconsIcon icon={Building02Icon} size={16} />
         </div>
         <span className="text-lg font-bold text-gray-900">OneTurn</span>
       </div>
@@ -92,7 +93,7 @@ export function Sidebar() {
                   : undefined
               }
             >
-              <item.icon className="size-4" />
+              <HugeiconsIcon icon={item.icon} size={16} />
               {item.label}
             </Link>
           )
@@ -113,7 +114,7 @@ export function Sidebar() {
             href="/login"
             className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
           >
-            <LogOut className="size-4" />
+            <HugeiconsIcon icon={Logout01Icon} size={16} />
           </Link>
         </div>
       </div>

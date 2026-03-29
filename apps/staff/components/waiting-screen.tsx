@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Check, X, Clock, Zap } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon, Cancel01Icon, Clock01Icon, ZapIcon } from "@hugeicons/core-free-icons"
 import { useStaff } from "@/context/staff-context"
 import { mockBranches } from "@workspace/mock-data"
 
@@ -82,9 +83,9 @@ export function WaitingScreen() {
         style={{ color: "var(--staff-muted)" }}
       >
         {currentBooking.type === "live" ? (
-          <Zap className="size-3.5" />
+          <HugeiconsIcon icon={ZapIcon} size={14} />
         ) : (
-          <Clock className="size-3.5" />
+          <HugeiconsIcon icon={Clock01Icon} size={14} />
         )}
         {currentBooking.type === "scheduled"
           ? `Bron: ${new Date(currentBooking.createdAt).toLocaleTimeString("uz-UZ", { hour: "2-digit", minute: "2-digit" })}`
@@ -141,7 +142,7 @@ export function WaitingScreen() {
             className="flex flex-[1.2] items-center justify-center gap-3 rounded-2xl py-6 text-xl font-bold uppercase tracking-wide text-white transition-all duration-75 hover:brightness-110 active:scale-[0.97]"
             style={{ backgroundColor: "var(--staff-green)", minHeight: "80px" }}
           >
-            <Check className="size-6" />
+            <HugeiconsIcon icon={Tick02Icon} size={24} />
             Keldi
           </button>
           <button
@@ -149,7 +150,7 @@ export function WaitingScreen() {
             className="flex flex-1 items-center justify-center gap-3 rounded-2xl py-6 text-xl font-bold uppercase tracking-wide text-white transition-all duration-75 opacity-85 hover:opacity-100 hover:brightness-110 active:scale-[0.97]"
             style={{ backgroundColor: "var(--staff-red)", minHeight: "80px" }}
           >
-            <X className="size-6" />
+            <HugeiconsIcon icon={Cancel01Icon} size={24} />
             Kelmadi
           </button>
         </div>

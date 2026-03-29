@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { MapPin, Search, ChevronDown, TrendingUp, X } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Location01Icon, Search01Icon, ArrowDown01Icon, AnalyticsUpIcon, Cancel01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
 import { useLocation } from "@/context/location-context"
 import { tashkentDistricts, citizenOrganizations } from "@workspace/mock-data"
 import type { LocationData } from "@/context/location-context"
@@ -128,9 +129,9 @@ export function Navbar({ isDemo }: { isDemo?: boolean }) {
             className="flex h-full items-center gap-2 border-r px-4 py-3 text-sm font-medium transition-colors hover:bg-gray-100"
             style={{ borderColor: "var(--c-border)", color: "var(--c-text)", minWidth: "220px" }}
           >
-            <MapPin className="size-4 shrink-0" style={{ color: "var(--c-primary)" }} />
+            <HugeiconsIcon icon={Location01Icon} size={16} className="shrink-0" style={{ color: "var(--c-primary)" }} />
             <span className="truncate">Toshkent, {location.name}</span>
-            <ChevronDown className="size-3.5 shrink-0" style={{ color: "var(--c-muted)" }} />
+            <HugeiconsIcon icon={ArrowDown01Icon} size={14} className="shrink-0" style={{ color: "var(--c-muted)" }} />
           </button>
 
           {showLocationPicker && (
@@ -149,7 +150,7 @@ export function Navbar({ isDemo }: { isDemo?: boolean }) {
                 >
                   <span className="font-medium">{d.name}</span>
                   {location.id === d.id && (
-                    <span className="text-xs" style={{ color: "var(--c-primary)" }}>✓</span>
+                    <HugeiconsIcon icon={Tick02Icon} size={12} style={{ color: "var(--c-primary)" }} />
                   )}
                 </button>
               ))}
@@ -160,7 +161,7 @@ export function Navbar({ isDemo }: { isDemo?: boolean }) {
         {/* Search bar */}
         <div className="relative flex-1" ref={searchRef}>
           <form onSubmit={handleSearchSubmit} className="flex h-full items-center">
-            <Search className="ml-4 size-4 shrink-0" style={{ color: "var(--c-muted)" }} />
+            <HugeiconsIcon icon={Search01Icon} size={16} className="ml-4 shrink-0" style={{ color: "var(--c-muted)" }} />
             <input
               ref={searchInputRef}
               type="text"
@@ -177,7 +178,7 @@ export function Navbar({ isDemo }: { isDemo?: boolean }) {
                 onClick={() => { setSearchQuery(""); searchInputRef.current?.focus() }}
                 className="mr-3 rounded-full p-1 hover:bg-gray-200"
               >
-                <X className="size-3.5" style={{ color: "var(--c-muted)" }} />
+                <HugeiconsIcon icon={Cancel01Icon} size={14} style={{ color: "var(--c-muted)" }} />
               </button>
             )}
           </form>
@@ -232,7 +233,7 @@ export function Navbar({ isDemo }: { isDemo?: boolean }) {
                       className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-gray-50"
                       style={{ color: "var(--c-text)" }}
                     >
-                      <TrendingUp className="size-3.5" style={{ color: "var(--c-warning)" }} />
+                      <HugeiconsIcon icon={AnalyticsUpIcon} size={14} style={{ color: "var(--c-warning)" }} />
                       {s}
                     </button>
                   ))}

@@ -1,14 +1,15 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Search,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  FileSpreadsheet,
-  Inbox,
-} from "lucide-react"
+  Search01Icon,
+  Cancel01Icon,
+  ArrowLeft01Icon,
+  ArrowRight01Icon,
+  FileExportIcon,
+  InboxIcon,
+} from "@hugeicons/core-free-icons"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Badge } from "@workspace/ui/components/badge"
@@ -194,7 +195,7 @@ export default function BookingsPage() {
           </Select>
 
           <div className="relative">
-            <Search className="absolute top-2.5 left-3 size-3.5 text-gray-400" />
+            <HugeiconsIcon icon={Search01Icon} size={14} className="absolute top-2.5 left-3 text-gray-400" />
             <Input
               placeholder="Telefon raqam..."
               value={phoneSearch}
@@ -210,7 +211,7 @@ export default function BookingsPage() {
               className="h-9 gap-1.5 rounded-xl text-xs"
               onClick={handleExport}
             >
-              <FileSpreadsheet className="size-3.5" />
+              <HugeiconsIcon icon={FileExportIcon} size={14} />
               Excel
             </Button>
           </div>
@@ -226,7 +227,7 @@ export default function BookingsPage() {
               >
                 {f.label}
                 <button onClick={f.onClear} className="ml-0.5 rounded-full p-0.5 hover:bg-gray-100">
-                  <X className="size-2.5" />
+                  <HugeiconsIcon icon={Cancel01Icon} size={10} />
                 </button>
               </Badge>
             ))}
@@ -244,7 +245,7 @@ export default function BookingsPage() {
         <div className="flex-1 overflow-auto">
           {paginated.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20">
-              <Inbox className="mb-3 size-12 text-gray-300" />
+              <HugeiconsIcon icon={InboxIcon} size={48} className="mb-3 text-gray-300" />
               <p className="text-sm font-semibold text-gray-900">
                 Natija topilmadi
               </p>
@@ -376,7 +377,7 @@ export default function BookingsPage() {
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}
               >
-                <ChevronLeft className="size-3" />
+                <HugeiconsIcon icon={ArrowLeft01Icon} size={12} />
                 Oldingi
               </Button>
               <span className="text-xs font-medium text-gray-700">
@@ -390,7 +391,7 @@ export default function BookingsPage() {
                 onClick={() => setPage((p) => p + 1)}
               >
                 Keyingi
-                <ChevronRight className="size-3" />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={12} />
               </Button>
             </div>
           </div>
