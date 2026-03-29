@@ -38,6 +38,9 @@ importers:
       '@workspace/mock-data':
         specifier: workspace:*
         version: link:../../packages/mock-data
+      '@workspace/sync':
+        specifier: workspace:*
+        version: link:../../packages/sync
       '@workspace/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -108,6 +111,9 @@ importers:
       '@workspace/mock-data':
         specifier: workspace:*
         version: link:../../packages/mock-data
+      '@workspace/sync':
+        specifier: workspace:*
+        version: link:../../packages/sync
       '@workspace/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -306,6 +312,9 @@ importers:
       '@workspace/mock-data':
         specifier: workspace:*
         version: link:../../packages/mock-data
+      '@workspace/sync':
+        specifier: workspace:*
+        version: link:../../packages/sync
       '@workspace/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -439,6 +448,19 @@ importers:
         version: 8.55.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
 
   packages/mock-data:
+    dependencies:
+      '@workspace/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      '@workspace/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/sync:
     dependencies:
       '@workspace/types':
         specifier: workspace:*

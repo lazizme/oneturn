@@ -11,7 +11,8 @@ export function WaitingScreen() {
   const {
     currentBooking,
     branchId,
-    dispatch,
+    markArrived,
+    markNoShow,
   } = useStaff()
   const [confirmNoShow, setConfirmNoShow] = useState(false)
 
@@ -23,11 +24,11 @@ export function WaitingScreen() {
   )
 
   function handleKeldi() {
-    dispatch({ type: "MARK_ARRIVED" })
+    markArrived()
   }
 
   function handleNoShowConfirm() {
-    dispatch({ type: "MARK_NO_SHOW" })
+    markNoShow()
     setConfirmNoShow(false)
   }
 

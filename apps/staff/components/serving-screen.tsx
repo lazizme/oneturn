@@ -15,6 +15,7 @@ export function ServingScreen() {
     elapsedSeconds,
     estimatedDuration,
     dispatch,
+    markComplete,
   } = useStaff()
   const [confirmUndo, setConfirmUndo] = useState(false)
   const [flashGreen, setFlashGreen] = useState(false)
@@ -46,7 +47,7 @@ export function ServingScreen() {
       toast.success(
         `${currentBooking!.ticketNumber} yakunlandi · ${durationMin} daqiqa`
       )
-      dispatch({ type: "MARK_COMPLETE" })
+      markComplete()
       setFlashGreen(false)
     }, 200)
   }

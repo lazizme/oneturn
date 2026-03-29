@@ -1,5 +1,6 @@
 import type { Booking } from "@workspace/types"
 import { generateTicketNumber, generateUzbekName, generateEditToken } from "@workspace/mock-data"
+import { publishBooking, nextTicket } from "@workspace/sync"
 import type { TimeSlot } from "./types"
 
 function delay(ms: number): Promise<void> {
@@ -69,9 +70,11 @@ function generateMockBooking(
   context: { orgId: string; branchId: string; serviceId: string; mode: "live" | "scheduled"; slot?: string }
 ): Booking {
   const name = generateUzbekName()
-  const ticket = generateTicketNumber("A", Math.floor(Math.random() * 50) + 10)
+  const ticket = typeof window !== "undefined"
+    ? nextTicket(context.branchId)
+    : generateTicketNumber("A", Math.floor(Math.random() * 50) + 10)
 
-  return {
+  const booking: Booking = {
     id: `bk-${Date.now()}`,
     ticketNumber: ticket,
     orgId: context.orgId,
@@ -81,8 +84,14 @@ function generateMockBooking(
     userName: `${name.first} ${name.last}`,
     type: context.mode,
     scheduledAt: context.slot ? new Date(context.slot) : undefined,
-    status: context.mode === "live" ? "pending" : "pending",
+    status: "pending",
     createdAt: new Date(),
     editToken: generateEditToken(),
   }
+
+  if (typeof window !== "undefined") {
+    publishBooking(booking)
+  }
+
+  return booking
 }

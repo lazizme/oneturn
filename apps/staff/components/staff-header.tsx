@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Maximize01Icon, Minimize01Icon, Logout01Icon } from "@hugeicons/core-free-icons"
+import { Maximize01Icon, Minimize01Icon, Logout01Icon, Refresh01Icon } from "@hugeicons/core-free-icons"
+import { resetDemo } from "@workspace/sync"
 import { useStaff } from "@/context/staff-context"
 
 interface StaffHeaderProps {
@@ -143,6 +144,20 @@ export function StaffHeader({ onLogout }: StaffHeaderProps) {
                   Operator · {branchName}
                 </p>
               </div>
+              <div
+                className="my-2 h-px"
+                style={{ backgroundColor: "var(--staff-border)" }}
+              />
+
+              <button
+                onClick={resetDemo}
+                className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-white/5"
+                style={{ color: "var(--staff-muted)" }}
+              >
+                <HugeiconsIcon icon={Refresh01Icon} size={16} />
+                Demo qayta boshlash
+              </button>
+
               <div
                 className="my-2 h-px"
                 style={{ backgroundColor: "var(--staff-border)" }}

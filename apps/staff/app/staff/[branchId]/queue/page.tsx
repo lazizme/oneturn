@@ -22,7 +22,7 @@ function QueueContent({
   isDemo: boolean
   onLogout: () => void
 }) {
-  const { currentStatus, dispatch } = useStaff()
+  const { currentStatus, markArrived, markComplete } = useStaff()
   const [dismissed, setDismissed] = useState(false)
 
   // Auto-request fullscreen on first mount (non-demo)
@@ -39,13 +39,13 @@ function QueueContent({
     if (!isDemo) return
     const interval = setInterval(() => {
       if (currentStatus === "waiting") {
-        dispatch({ type: "MARK_ARRIVED" })
+        markArrived()
       } else if (currentStatus === "serving") {
-        dispatch({ type: "MARK_COMPLETE" })
+        markComplete()
       }
     }, 30000)
     return () => clearInterval(interval)
-  }, [isDemo, currentStatus, dispatch])
+  }, [isDemo, currentStatus, markArrived, markComplete])
 
   return (
     <div

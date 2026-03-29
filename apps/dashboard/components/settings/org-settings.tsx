@@ -2,7 +2,8 @@
 
 import { useState, useRef } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Loading03Icon, Building02Icon, Upload01Icon } from "@hugeicons/core-free-icons"
+import { Loading03Icon, Building02Icon, Upload01Icon, Refresh01Icon } from "@hugeicons/core-free-icons"
+import { resetDemo } from "@workspace/sync"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -168,6 +169,21 @@ export function OrgSettings() {
             "Saqlash"
           )}
         </Button>
+
+        <div className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="text-sm font-semibold text-red-800">Demo rejimni qayta boshlash</p>
+          <p className="mt-1 text-xs text-red-600">
+            Barcha navbat va bron ma&apos;lumotlarini tozalaydi. Faqat demo uchun.
+          </p>
+          <Button
+            variant="outline"
+            className="mt-3 gap-1.5 rounded-xl border-red-300 text-xs text-red-700 hover:bg-red-100"
+            onClick={resetDemo}
+          >
+            <HugeiconsIcon icon={Refresh01Icon} size={14} />
+            Demo qayta boshlash
+          </Button>
+        </div>
       </div>
 
       {/* Preview — right 40% */}

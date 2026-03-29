@@ -17,6 +17,7 @@ import {
   generateTicketNumber,
   generateEditToken,
 } from "@workspace/mock-data"
+import { subscribe, updateBookingStatus } from "@workspace/sync"
 import { toast } from "sonner"
 
 interface QueueState {
@@ -31,6 +32,8 @@ interface QueueContextValue extends QueueState {
   markNoShow: (bookingId: string) => void
   addSimulatedBooking: () => void
 }
+
+const DEMO_ORG_ID = "agrobank-demo"
 
 const QueueContext = createContext<QueueContextValue | null>(null)
 
@@ -122,19 +125,35 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     setBookings(createTodayBookings(selectedBranch))
   }, [selectedBranch])
 
+  // Subscribe to sync events (bookings from citizen app)
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    return subscribe({ branchId: selectedBranch }, (event) => {
+      if (event.type === "NEW_BOOKING") {
+        setBookings((prev) => [event.booking, ...prev])
+        toast.success(`Yangi bron: ${event.booking.ticketNumber} · ${event.booking.userName}`)
+      }
+      if (event.type === "BOOKING_UPDATED") {
+        setBookings((prev) =>
+          prev.map((b) => (b.id === event.booking.id ? event.booking : b))
+        )
+      }
+    })
+  }, [selectedBranch])
+
   const markArrived = useCallback((bookingId: string) => {
     setBookings((prev) =>
       prev.map((b) => {
         if (b.id !== bookingId) return b
         if (b.status === "pending") {
-          return { ...b, status: "arrived" as const, arrivedAt: new Date() }
+          const updated = { ...b, status: "arrived" as const, arrivedAt: new Date() }
+          if (typeof window !== "undefined") updateBookingStatus(b, "arrived", { arrivedAt: new Date() })
+          return updated
         }
         if (b.status === "arrived") {
-          return {
-            ...b,
-            status: "serving" as const,
-            serviceStartedAt: new Date(),
-          }
+          const updated = { ...b, status: "serving" as const, serviceStartedAt: new Date() }
+          if (typeof window !== "undefined") updateBookingStatus(b, "serving", { serviceStartedAt: new Date() })
+          return updated
         }
         return b
       })
@@ -144,6 +163,14 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   const markCompleted = useCallback((bookingId: string) => {
     setBookings((prev) => {
       const booking = prev.find((b) => b.id === bookingId)
+      if (booking && typeof window !== "undefined") {
+        updateBookingStatus(booking, "completed", {
+          serviceEndedAt: new Date(),
+          actualDurationMin: booking.serviceStartedAt
+            ? Math.round((Date.now() - new Date(booking.serviceStartedAt).getTime()) / 60000)
+            : undefined,
+        })
+      }
       const updated = prev.map((b) =>
         b.id === bookingId
           ? {
@@ -178,13 +205,15 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const markNoShow = useCallback((bookingId: string) => {
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.id === bookingId
-          ? { ...b, status: "no_show" as const }
-          : b
+    setBookings((prev) => {
+      const booking = prev.find((b) => b.id === bookingId)
+      if (booking && typeof window !== "undefined") {
+        updateBookingStatus(booking, "no_show")
+      }
+      return prev.map((b) =>
+        b.id === bookingId ? { ...b, status: "no_show" as const } : b
       )
-    )
+    })
     toast.error("Foydalanuvchi reytingi kamaytirildi")
   }, [])
 

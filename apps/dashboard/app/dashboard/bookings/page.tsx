@@ -22,6 +22,7 @@ import {
 } from "@workspace/ui/components/select"
 import type { Booking, BookingStatus } from "@workspace/types"
 import { mockBookings, mockBranches } from "@workspace/mock-data"
+import { getHistory, subscribe } from "@workspace/sync"
 import { Topbar } from "@/components/topbar"
 import { BookingDetailPanel } from "@/components/bookings/booking-detail-panel"
 import { BookingsSkeleton } from "@/components/bookings/bookings-skeleton"
@@ -34,6 +35,7 @@ import {
 import { toast } from "sonner"
 
 const PAGE_SIZE = 20
+const DEMO_ORG_ID = "agrobank-demo"
 
 const STATUS_CONFIG: Record<
   BookingStatus,
@@ -65,6 +67,28 @@ export default function BookingsPage() {
     return () => clearTimeout(t)
   }, [])
 
+  const [syncBookings, setSyncBookings] = useState<Booking[]>([])
+
+  // Load sync history on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    setSyncBookings(getHistory(DEMO_ORG_ID))
+  }, [])
+
+  // Subscribe to live updates
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    return subscribe({ orgId: DEMO_ORG_ID }, (event) => {
+      if (event.type === "NEW_BOOKING") {
+        setSyncBookings((prev) => [event.booking, ...prev])
+      } else {
+        setSyncBookings((prev) =>
+          prev.map((b) => (b.id === event.booking.id ? event.booking : b))
+        )
+      }
+    })
+  }, [])
+
   const allServices = useMemo(() => {
     const set = new Map<string, string>()
     for (const branch of mockBranches) {
@@ -76,7 +100,17 @@ export default function BookingsPage() {
   }, [])
 
   const filtered = useMemo(() => {
-    let result = [...mockBookings]
+    // Merge sync bookings (from localStorage) with mock data, dedup by ID
+    const allBookings = [...syncBookings, ...mockBookings]
+    const seen = new Set<string>()
+    const deduped: Booking[] = []
+    for (const b of allBookings) {
+      if (!seen.has(b.id)) {
+        seen.add(b.id)
+        deduped.push(b)
+      }
+    }
+    let result = deduped
 
     if (branchFilter !== "all") {
       result = result.filter((b) => b.branchId === branchFilter)
@@ -97,7 +131,7 @@ export default function BookingsPage() {
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
-  }, [branchFilter, statusFilter, serviceFilter, phoneSearch])
+  }, [syncBookings, branchFilter, statusFilter, serviceFilter, phoneSearch])
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)

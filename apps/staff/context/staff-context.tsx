@@ -16,6 +16,7 @@ import {
   generatePhone,
   generateEditToken,
 } from "@workspace/mock-data"
+import { getQueue, seedIfEmpty, subscribe, updateBookingStatus } from "@workspace/sync"
 import { toast } from "sonner"
 
 export interface Operator {
@@ -184,6 +185,9 @@ interface StaffContextValue extends StaffState {
   estimatedDuration: number | undefined
   queueCount: number
   avgWait: number
+  markArrived: () => void
+  markNoShow: () => void
+  markComplete: () => void
 }
 
 const StaffContext = createContext<StaffContextValue | null>(null)
@@ -213,6 +217,58 @@ export function StaffProvider({
     )
     return service?.estimatedDurationMin
   }, [currentBooking, state.branchId])
+
+  // ── Sync: seed localStorage on login & load synced queue ───────────────
+  useEffect(() => {
+    if (!state.operator || !state.branchId) return
+    // Seed localStorage with the initial mock queue if it's empty
+    seedIfEmpty("agrobank-demo", state.branchId, state.queue)
+    // Load from localStorage (may have more bookings from citizen app)
+    const syncedQueue = getQueue(state.branchId)
+    if (syncedQueue.length > 0) {
+      dispatch({ type: "SET_QUEUE", queue: syncedQueue })
+    }
+  }, [state.operator, state.branchId]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Sync: subscribe to cross-tab events ────────────────────────────────
+  useEffect(() => {
+    if (!state.operator || !state.branchId) return
+    return subscribe({ branchId: state.branchId }, (event) => {
+      if (event.type === "NEW_BOOKING") {
+        dispatch({ type: "ADD_TO_QUEUE", booking: event.booking })
+        toast.success(`Yangi navbat: ${event.booking.ticketNumber} · ${event.booking.userName}`)
+      }
+      if (event.type === "BOOKING_UPDATED") {
+        // Reload full queue to stay in sync
+        dispatch({ type: "SET_QUEUE", queue: getQueue(state.branchId) })
+      }
+    })
+  }, [state.operator, state.branchId])
+
+  // ── Sync: write-through wrappers for status changes ────────────────────
+  const handleMarkArrived = useCallback(() => {
+    const booking = state.queue[0]
+    if (booking && typeof window !== "undefined") {
+      updateBookingStatus(booking, "arrived", { arrivedAt: new Date() })
+    }
+    dispatch({ type: "MARK_ARRIVED" })
+  }, [state.queue])
+
+  const handleMarkNoShow = useCallback(() => {
+    const booking = state.queue[0]
+    if (booking && typeof window !== "undefined") {
+      updateBookingStatus(booking, "no_show")
+    }
+    dispatch({ type: "MARK_NO_SHOW" })
+  }, [state.queue])
+
+  const handleMarkComplete = useCallback(() => {
+    const booking = state.queue[0]
+    if (booking && typeof window !== "undefined") {
+      updateBookingStatus(booking, "completed", { serviceEndedAt: new Date() })
+    }
+    dispatch({ type: "MARK_COMPLETE" })
+  }, [state.queue])
 
   // Timer tick every second when serving
   useEffect(() => {
@@ -268,6 +324,9 @@ export function StaffProvider({
         estimatedDuration: getEstimatedDuration(),
         queueCount: state.queue.length,
         avgWait,
+        markArrived: handleMarkArrived,
+        markNoShow: handleMarkNoShow,
+        markComplete: handleMarkComplete,
       }}
     >
       {children}

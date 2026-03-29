@@ -10,13 +10,13 @@ import {
 } from "@hugeicons/core-free-icons"
 import { Card } from "@workspace/ui/components/card"
 import { mockBookings, mockBranches } from "@workspace/mock-data"
+import { getStats, subscribe } from "@workspace/sync"
 import { Topbar } from "@/components/topbar"
 import { StatCard } from "@/components/overview/stat-card"
 import { BranchLeaderboard } from "@/components/overview/branch-leaderboard"
 import { HourlyChart } from "@/components/overview/hourly-chart"
 import { RecentBookings } from "@/components/overview/recent-bookings"
 import { OverviewSkeleton } from "@/components/overview/overview-skeleton"
-import { useInterval } from "@/hooks/use-interval"
 
 const BranchMap = dynamic(
   () => import("@/components/overview/branch-map"),
@@ -31,6 +31,8 @@ const BranchMap = dynamic(
     ),
   }
 )
+
+const DEMO_ORG_ID = "agrobank-demo"
 
 function computeStats() {
   const completed = mockBookings.filter(
@@ -52,17 +54,25 @@ function computeStats() {
 
 export default function OverviewPage() {
   const [loading, setLoading] = useState(true)
-  const [todayCount, setTodayCount] = useState(142)
+  const [todayCount, setTodayCount] = useState(() => {
+    if (typeof window !== "undefined") {
+      return getStats(DEMO_ORG_ID).todayTotal
+    }
+    return 142
+  })
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 600)
     return () => clearTimeout(t)
   }, [])
 
-  // Simulate live ticket counter
-  useInterval(() => {
-    setTodayCount((prev) => prev + 1)
-  }, 45000)
+  // Subscribe to sync events — update stats in real time
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    return subscribe({ orgId: DEMO_ORG_ID }, () => {
+      setTodayCount(getStats(DEMO_ORG_ID).todayTotal)
+    })
+  }, [])
 
   if (loading) {
     return (
