@@ -21,3 +21,7 @@
   --c-other: #F59E0B;
   --c-other-light: #FFFBEB;
 }
+
+.leaflet-container {
+  z-index: 0;
+}
